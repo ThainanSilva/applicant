@@ -19,7 +19,7 @@ session_start();
 $(document).ready(function(){
   /* defining global variables*/
 window.visitorsActualPage = 1;
-loadvisitors(1);
+loadvisitors(1,'false');
 loadvisitorsType();
   window.webcamactive = 0;
   window.editingVisitor = 0;
@@ -90,7 +90,7 @@ function loadvisitorsPicture(visitorID){
   return false
 }
 
-  function loadvisitors(page){
+  function loadvisitors(page, search){
     $.ajaxSetup({
     timeout: 6000, //time in miliseconds
     error:function(xhr){
@@ -100,7 +100,7 @@ function loadvisitorsPicture(visitorID){
   $.ajax({
     method: "POST",
     url: "../api/visitorsUniversal.php",
-    data:{json: '[{"function":"GetVisitorsList","page":"'+page+'","pagelimit":"10"}]'}
+    data:{json: '[{"function":"GetVisitorsList","page":"'+page+'","search":"'+search+'"}]'} 
   })
   .done(function( data ) {
     window.visitorsReceiveobj = data
@@ -167,7 +167,7 @@ function loadvisitorsPicture(visitorID){
 
     }
 $(".page-link").click(function(){
-  loadvisitors($(this).attr('pageId'));
+  loadvisitors($(this).attr('pageId'),'false');
 })
   })
 }
@@ -335,7 +335,7 @@ $(".page-link").click(function(){
             window.notificationCaller('success', 'Salvo',  "com sucesso");
             $("#SaveNewVisitor").removeAttr('disabled');
             $("#newVisitorModal").modal('hide')
-            loadvisitors(window.visitorsReceiveobj.activePage);
+            loadvisitors(window.visitorsReceiveobj.activePage,'false');
             window.editingVisitor = 0;
           }
           else{
@@ -382,7 +382,7 @@ $(".page-link").click(function(){
         window.notificationCaller('success', 'Salvo',  "com sucesso");
         $("#SaveNewVisitor").removeAttr('disabled');
         $("#newVisitorModal").modal('hide')
-        loadvisitors(window.visitorsReceiveobj.activePage);
+        loadvisitors(window.visitorsReceiveobj.activePage,'false');
       }
       else{
         window.notificationCaller('alert', 'Erro: ',  jsonResponse.message);
@@ -402,30 +402,33 @@ $(".page-link").click(function(){
     chechCPFExist();
   })
 //############################################################################################
-$("#serchinputvisitor").keyup(function(){
+$("#serchinputvisitor").keyup(function(k){
   if($("#serchinputvisitor").val() ==""){
-    loadvisitors(window.visitorsReceiveobj.activePage);
+    loadvisitors(window.visitorsReceiveobj.activePage,'false');
   }
   else{
 
+
   var input = $("#serchinputvisitor").val().toLowerCase()
   var rgxp = new RegExp(input, "g");
-
+resultOfSearch = 1
   outptstring = "";
   for (var k in window.visitorsReceiveobj.Visitors){
     console.log(window.visitorsReceiveobj.Visitors[k].name)
 
 
-
-
 if(window.visitorsReceiveobj.Visitors[k].name.toLowerCase().match(rgxp) || window.visitorsReceiveobj.Visitors[k].cpf.toLowerCase().match(rgxp) || window.visitorsReceiveobj.Visitors[k].typeofvisitor.toLowerCase().match(rgxp)){
-
+    resultOfSearch++;
     outptstring += " <tr>";
     outptstring += "<td><input type='checkbox' value='1'></td>";
     outptstring += "<td><a data-toggle='modal' data-target='#newVisitorModal' data-type='1' data-visitor-type='"+window.visitorsReceiveobj.Visitors[k].visitors_type+"' data-visitor-name='"+window.visitorsReceiveobj.Visitors[k].name+"' data-visitor-cpf='"+window.visitorsReceiveobj.Visitors[k].cpf+"' data-visitor-id='"+window.visitorsReceiveobj.Visitors[k].id+"' href='#'class='lineEditUser' >"+window.visitorsReceiveobj.Visitors[k].name+"</a></td>";
     outptstring += "<td id='cpflist'>"+window.visitorsReceiveobj.Visitors[k].typeofvisitor+"</td>";//cpf.replace(/^(\d{3})(\d{3})(\d{3})(\d{2}).*/,"$1.$2.$3-$4")
 outptstring += "<td><a title='Registrar Acesso' data-toggle='modal' data-target='#RegistNewAcessModal' data-type='1' data-visitor-type='"+window.visitorsReceiveobj.Visitors[k].visitors_type+"' data-visitor-name='"+window.visitorsReceiveobj.Visitors[k].name+"' data-visitor-cpf='"+window.visitorsReceiveobj.Visitors[k].cpf+"' data-visitor-id='"+window.visitorsReceiveobj.Visitors[k].id+"' href='#'  ><span class='glyphicon glyphicon-transfer' aria-hidden='true'></span></a></td>";
     outptstring += "</tr>"
+
+    }
+    else{  
+          resultOfSearch = resultOfSearch-1;
     }
   }
 
@@ -434,6 +437,9 @@ outptstring += "<td><a title='Registrar Acesso' data-toggle='modal' data-target=
   $('.lineEditUser').on('click', function (event) {
 
   });
+  if(resultOfSearch == -29 && resultOfSearch < 30 && k.keyCode != 8){
+    loadvisitors(1,input);
+  }          
 }
 })
 
@@ -471,7 +477,7 @@ $('#SaveVisitorAccesRegister').click(function(){
       window.webcamactive = 0
       window.snappictureVisitorSave = "";
           $("#newVisitorModal").modal('hide')
-          loadvisitors(window.visitorsReceiveobj.activePage);
+          loadvisitors(window.visitorsReceiveobj.activePage,'false');
           window.editingVisitor = 0;
           //jsonResponse = jQuery.parseJSON(data);
         })

@@ -61,11 +61,11 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
               if($sendBack['numRows'] = $visitors->getVisitorsInfoByCompanyRowCount($_SESSION['company_id'])){
                 
                 
-                if(isset($jobj[0]['pagelimit']) and $jobj[0]['pagelimit'] != 30){
+                if(isset($jobj[0]['pagelimit']) and $jobj[0]['pagelimit'] != 30 and is_numeric($jobj[0]['pagelimit'])){
                   $pagelimit = $jobj[0]['pagelimit'];}
                   else{
                     $pagelimit = 30;}
-                if(isset($jobj[0]['page']) and $jobj[0]['page'] != 1){
+                if(isset($jobj[0]['page']) and $jobj[0]['page'] != 1 and is_numeric($jobj[0]['page'])){
                   $requestPage = $jobj[0]['page'];}
                   else{
                     $requestPage = 1;}
@@ -79,7 +79,13 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
                     $requestFrom =  $requestFrom-$pagelimit; 
                     }
                   $requestTo = $pagelimit * $requestPage;
-                if($resposneArray = $visitors->getVisitorsInfoByCompany($_SESSION['company_id'],$requestFrom, $pagelimit)){
+                  if (isset($jobj[0]['search']) and $jobj[0]['search'] != 'false' ){
+                    $search = $jobj[0]['search'];
+                  }else{
+                    $search = 'false';
+                  }
+                if($resposneArray = $visitors->getVisitorsInfoByCompany($_SESSION['company_id'],$requestFrom, $pagelimit,$search)){
+                  $sendBack['search']= $search;
                   $sendBack['result']= 'success';
                   $sendBack['message']= 'Visitors List';
                   $sendBack['fromTo']= $requestFrom.' '.$requestTo;

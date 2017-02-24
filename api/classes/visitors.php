@@ -173,16 +173,27 @@ class visitors
       //=======================================================================================================
 
 
-      public function getVisitorsInfoByCompany($company_id, $from, $to){
+      public function getVisitorsInfoByCompany($company_id, $from, $to, $search){
          try {
             // "SELECT COUNT(*) FROM `table` WHERE `some_condition`"
+            if($search !="" and $search != "false"){
+                if(is_numeric($search)){
+                    $query = "SELECT visitors.name, visitors.id, visitors.company_id, visitors.cpf, visitors.visitors_type, visitors_type.name as typeofvisitor  from visitors INNER JOIN visitors_type ON visitors.visitors_type = visitors_type.id where visitors.company_id = ".$company_id." and visitors.cpf like '%".$search."%' order by visitors.name limit ".$from.",".$to;
+                }else{
+                    $query = "SELECT visitors.name, visitors.id, visitors.company_id, visitors.cpf, visitors.visitors_type, visitors_type.name as typeofvisitor  from visitors INNER JOIN visitors_type ON visitors.visitors_type = visitors_type.id where visitors.company_id = ".$company_id." and visitors.name like '%".$search."%' order by visitors.name limit ".$from.",".$to;
+                }
+            }else{
+                $query = "SELECT visitors.name, visitors.id, visitors.company_id, visitors.cpf, visitors.visitors_type, visitors_type.name as typeofvisitor  from visitors INNER JOIN visitors_type ON visitors.visitors_type = visitors_type.id where visitors.company_id = ".$company_id." order by visitors.name limit ".$from.",".$to;
+                
 
-             $query = "SELECT visitors.name, visitors.id, visitors.company_id, visitors.cpf, visitors.visitors_type, visitors_type.name as typeofvisitor  from visitors INNER JOIN visitors_type ON visitors.visitors_type = visitors_type.id where visitors.company_id = ".$company_id." order by visitors.name limit ".$from.",".$to;
+            }
+
              $sql = $this->db->prepare($query);
              $sql->execute();
              $resrow = $sql->fetchAll(PDO::FETCH_ASSOC);
              $result = $this->db->query($query);
              if (!empty($result) and $result->rowCount()>0){
+
                return $resrow;//retorna os dados do banco como array
 
 

@@ -11,6 +11,6 @@ if (isset($_POST['email']) and isset($_POST['profile']) and $_POST['email'] != "
     
     
     echo $user->jsonfyResponse('error01', 'wrong login method');
-
+//teste de comentario
 } 
 ?> 

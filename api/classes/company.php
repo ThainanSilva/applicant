@@ -7,9 +7,58 @@ class company
     {
       $this->db = $db_connect;
     }
+ 
+//===============================================================================================================================
+      //================================= cria token =============================================
+      //===============================================================================================================================
 
 
 
+
+      public function SaveNewProfile($company_id, $data)
+      {
+         try
+         {
+            
+             $stmt = $this->db->prepare("UPDATE company set RAZAO_SOCIAL = :RAZAO_SOCIAL, CNPJ_CPF = :CNPJ_CPF, timezone = :timezone, NAME = :NAME  WHERE id =".$company_id." limit 1 ");
+            $stmt->bindValue(':RAZAO_SOCIAL', $RAZAO_SOCIAL);
+            $stmt->bindValue(':CNPJ_CPF', $CNPJ_CPF);
+            $stmt->bindValue(':timezone', $timezone);
+            $stmt->bindValue(':NAME', $NAME);
+            if($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }
+             
+             
+             
+             
+             
+             
+             
+             
+             $query = "SELECT timezone FROM company WHERE id =".$company_id." limit 1 ";
+             $sql = $this->db->prepare($query);
+             $sql->execute();
+             $resrow = $sql->fetchAll(PDO::FETCH_ASSOC);
+             $result = $this->db->query($query);
+             if (!empty($result) and $result->rowCount()>0){
+               return $resrow;//retorna os dados do banco como array
+
+
+             }else
+             {
+                 return false;
+             }
+             $this->db = null;
+         }
+         catch(PDOException $e)
+         {
+             echo $e->getMessage();
+         }
+              $this->db = null;
+     }
       //===============================================================================================================================
       //================================= cria token =============================================
       //===============================================================================================================================

@@ -32,11 +32,11 @@ if(isset($_POST['token']) || isset($_POST['name']) || isset($_POST['password']) 
         
 }
  
-    if($user->checkTokenValid($_GET['token']) =="invalid"){
+    if($user->checkTokenValid($_POST['token']) =="invalid"){
         $user->jsonfyResponse('Error_Invalid_Token::', "Invalid Token");
             
         }
-    if($user->checkTokenValid($_GET['token']) =="expired"){
+    if($user->checkTokenValid($_POST['token']) =="expired"){
         $user->jsonfyResponse('Error_Expired_Token::', "Token Expired");
 
         }        

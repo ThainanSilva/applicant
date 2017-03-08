@@ -56,7 +56,6 @@ class USER
            $query = " update tokens set valid = 0 where token = '".$token."' ";
            $sql = $this->db->prepare($query);
            $sql->execute();
-           $resrow = $sql->fetchAll();
            $result = $this->db->query($query);
            if ($result){
               return true;
@@ -82,8 +81,7 @@ class USER
            $new_password = password_hash($user_password, PASSWORD_DEFAULT);
            $query = " update Users set password = '".$new_password."' where id = ".$user_id. " LIMIT 1";
            $sql = $this->db->prepare($query);
-           $sql->execute();
-           $resrow = $sql->fetchAll();
+           $sql->execute(); 
            $result = $this->db->query($query);
            if ($result){
               return true;

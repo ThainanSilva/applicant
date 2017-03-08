@@ -17,21 +17,22 @@ $access = new access($db_connect);
 
 require_once('classes/utils.php');
 $utils = new utils($db_connect);
-
+            
 if(isset($_POST['json']) and isset($_SESSION['company_id'])){
+
     $jobj =  json_decode($_POST['json'], true);
-
-    if (isset($jobj[0]['function'])){
+            
+    if (isset($jobj['function'])){
  
  
 
-    switch ($jobj[0]['function']) {
+    switch ($jobj['function']) {
             case 'SaveEditCompany':
               
                   if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){//verifica se o usuario tem acesso a essa empresa
                     if($privileges = $priv->GetUsersInfo('config', $userProfile) and $privileges >1 ){//verifica se o privilegios do usuario permitem Salvar
-                    if($jobj[0]['RAZAO_SOCIAL'] != "" && !empty($jobj[0]['RAZAO_SOCIAL']) && is_numeric($jobj[0]['CNPJ_CPF']) && $jobj[0]['CNPJ_CPF'] != "" && !empty($jobj[0]['CNPJ_CPF']) && is_numeric($jobj[0]['timezone']) && $jobj[0]['timezone'] != "" && !empty($jobj[0]['timezone']) && $jobj[0]['NAME'] != "" && !empty($jobj[0]['NAME']) ){
-                      if($company->saveEditCompany(strip_tags($jobj[0]['RAZAO_SOCIAL']), strip_tags($jobj[0]['CNPJ_CPF']),strip_tags($jobj[0]['timezone']),strip_tags($jobj[0]['NAME']), $_SESSION['company_id'] )){
+                    if($jobj['RAZAO_SOCIAL'] != "" && !empty($jobj['RAZAO_SOCIAL']) && is_numeric($jobj['CNPJ_CPF']) && $jobj['CNPJ_CPF'] != "" && !empty($jobj['CNPJ_CPF']) && is_numeric($jobj['timezone']) && $jobj['timezone'] != "" && !empty($jobj['timezone']) && $jobj['NAME'] != "" && !empty($jobj['NAME']) ){
+                      if($company->saveEditCompany(strip_tags($jobj['RAZAO_SOCIAL']), strip_tags($jobj['CNPJ_CPF']),strip_tags($jobj['timezone']),strip_tags($jobj['NAME']), $_SESSION['company_id'] )){
 
                         echo $utils->jsonfyResponse('success', 'Saved');
                       }else{
@@ -54,10 +55,8 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
                             if($companyTimezone = $company->getCompanyTimezone($_SESSION['company_id'])){//pega o timezone da empresa
                                 $return['companytimezone'] = $companyTimezone;
                                 $jsonencoded = json_encode($return);
-				                        echo $jsonencoded;
+				 echo $jsonencoded;
                             }
-
-
                         }
                     }
         	    }
@@ -67,14 +66,30 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
              if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){//verifica se o usuario tem acesso a essa empresa
                     if($privileges = $priv->GetUsersInfo('config', $userProfile) and $privileges >0 ){//verifica se o privilegios do usuario permitem Salvar
                         if($sendback = $company->getCompanyProfiles($_SESSION['company_id'])){
-                          $return = json_encode($sendback);
-                          echo $return;
+                            header('Content-Type: application/json');
+                            $return = json_encode($sendback);
+                            echo $return;
                         }
 
                     }
         	    }
  
         break;
+        
+        
+        //+++++++++++++++++++++++++++++++===============+++++++++++++++++++++++++++++++++++++++++++
+        case 'SaveNewProfile'://retorna lista de visitantes]
+            echo var_dump($jobj );
+                  if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){//verifica se o usuario tem acesso a essa empresa
+                    if($privileges = $priv->GetUsersInfo('config', $userProfile) and $privileges >0 ){//verifica se o privilegios do usuario permitem Salvar
+                        if($sendback = $company->SaveNewProfile($_SESSION['company_id'], $jobj['data'])){
+                          $return = $jobj['data'][0]; //json_encode($sendback);
+                          echo var_dump($jobj );
+                        }
+
+                    }
+        	    }
+          break;
         //+++++++++++++++++++++++++++++++===============+++++++++++++++++++++++++++++++++++++++++++
         case 'getProfilesAttr'://retorna lista de visitantes]
                   if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){//verifica se o usuario tem acesso a essa empresa

@@ -84,4 +84,9 @@ $("#visitors").click(function() {
 
 })
 
+$("#visitorsType").click(function() {
+  loadPage('pages/visitorsType.php', "#visitorsType");
+
+})
+
 });

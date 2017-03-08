@@ -19,8 +19,7 @@ require_once('../api/companycheck.php');
 
    <script src="../js/jquery-3.1.0.min.js"></script>
    <script src="../js/bootstrap-datetimepicker.min.js"></script>
-   <script src="../js/jquery.maskedinput.min.js"></script>
-   <script type="text/javascript" src="js/notifications.js"></script>
+   <script src="../js/jquery.maskedinput.min.js"></script>   
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -75,9 +74,9 @@ require_once('../api/companycheck.php');
 
             <li><a href="chooseCompany.php"><span class="glyphicon glyphicon-transfer" aria-hidden="true"></span> Mudar Empresa</a></li>
             <?php if($priv->GetUsersInfo('config', $userProfile) > 0){  ?>   <li role="separator" class="divider"></li>
-            <li><a id="usersConfigs" href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> UsuÃ¡rios</a></li><?php }?>
+            <li><a id="usersConfigs" href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Usuários</a></li><?php }?>
             <?php if($priv->GetUsersInfo('config', $userProfile) > 0){  ?><li role="separator" class="divider"></li>
-             <li><a id="companyConfigs"href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> ConfiguraÃ§Ãµes</a></li>        <?php }   ?>
+             <li><a id="companyConfigs"href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Configurações</a></li>        <?php }   ?>
           </ul>
         </li>
 
@@ -86,12 +85,12 @@ require_once('../api/companycheck.php');
       	<?php if($priv->GetUsersInfo('visitors', $userProfile) > 0){  ?>
           <li class="dropdown">
              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="dropdown" aria-haspopup="true" aria-expanded="false" id="visitors" href="#"><i class="fa fa-users" aria-hidden="true"></i> Visitantes <span class="caret"></span></a>
-             <!--<ul class="dropdown-menu">
+             <ul class="dropdown-menu">
 
-               <li><a href=""><i class="fa fa-user" aria-hidden="true"></i> Tipos de visitantes</a></li>
+               <li><a id="visitorsType" href="#"><i class="fa fa-user" aria-hidden="true"></i> Tipos de visitantes</a></li>
                <li><a href=""><i class="fa fa-universal-access" aria-hidden="true"></i>
 Perfis de Acesso</a> </li>
-             </ul>>-->
+             </ul>
            </li>
 
 
@@ -107,7 +106,7 @@ Perfis de Acesso</a> </li>
              <li><a id="access" href="#"> Acessos por periodo</a></li>           
              <li><a href="#"> Visitantes Ativos</a></li> 
              <li><a href="#"> Tipos de Visitantes</a></li>
-             <li><a href="#"> UsuÃ¡rios</a></li>  
+             <li><a href="#"> Usuários</a></li>  
            </ul>
         
         
@@ -119,7 +118,7 @@ Perfis de Acesso</a> </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <?php echo $_SESSION['user_name']?> <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> ConfiguraÃ§Ãµes</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Configurações</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span> Mudar minha senha</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="logOut.php"><span class="glyphicon glyphicon-off" aria-hidden="true"></span> Sair</a></li>

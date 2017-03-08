@@ -20,6 +20,7 @@ session_start();
     window.webcamactive = 0;
     window.editingVisitor = 0;
     window.visitorPicture = "";
+    
   })
 
   
@@ -51,7 +52,7 @@ session_start();
           outptstring += "<td><input type='checkbox' value='1'></td>";
           outptstring += "<td>"+window.visitorsReceiveobj[k].name+"</td>";      
           outptstring += "<td>"
-                            +"<a title='Registrar Acesso' class='deleteVisitorType' data-toggle='confirmation' class='btn btn-large btn-primary'  visitorTypeId='"+window.visitorsReceiveobj[k].id+"' href='#'>"
+                            +"<a title='Deseja realmente excluir?' data-btn-ok-label='Sim' data-btn-cancel-label='N&atilde;o' class='tipov btn btn-large btn-primary'  visitorTypeId='"+window.visitorsReceiveobj[k].id+"' href='#'>"
                               +"<center>"
                                 +"<i class='fa fa-trash' aria-hidden='true'>"
                                 +"</i>"
@@ -65,8 +66,7 @@ session_start();
 
       $("#visitor_table tbody").html(outptstring)
 
-      $('.deleteVisitorType').on('click', function (e) {
-        var idVisitorType = $(this).attr("visitorTypeId")
+      function DeleteVisitorType(idVisitorType) {        
         console.log(idVisitorType);
         $.ajaxSetup({
           timeout: 6000, //time in miliseconds
@@ -75,7 +75,7 @@ session_start();
             }
           });
 
-          /*$.ajax({
+          $.ajax({
             method: "POST",
             url: "../api/visitorsUniversal.php",            
             data:{json: '[{"function":"DeleteVisitorsType","id":"'+idVisitorType+'"}]'}            
@@ -88,14 +88,27 @@ session_start();
               console.log("entrou no if");
               
             }
-          })*/
+          })
+      }
+      $('.tipov').confirmation({
+                onConfirm: function() {
+                  var idVisitorType = $(this).attr("visitorTypeId")
+                  DeleteVisitorType(idVisitorType)
+                },
+                onCancel: function() {
+                  
+                }
+  
+    }) 
+      $(".tipov").click(function(){
+          $(this).confirmation("show")
+                 
       })
-      $('[data-toggle=confirmation]').confirmation();
     })
 }
 
 </script>
-<script src="../js/bootstrap.min.js.download"></script>
+<script src="../js/bootstrap-confirmation.min.js"></script>
 <div class="panel panel-default customWindow" >
   <div class="panel-heading">Visitantes </div>
   <div class="panel-body">

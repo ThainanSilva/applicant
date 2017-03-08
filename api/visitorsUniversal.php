@@ -132,6 +132,41 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
         }else{ echo 'ea4';}
 
         break;
+       case 'GetVisitorsType':// pegar perfis dos visitantes
+
+        if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){
+          if($privileges = $priv->GetUsersInfo('visitors', $userProfile) and $privileges >0 ){
+            if($resposneArray = $visitors->GetVisitorsProfiles($_SESSION['company_id'], false)){
+              
+              $response = json_encode($resposneArray);
+              echo $response;
+
+
+            }else{
+              $sendBack['result']= 'empty';
+              $response = json_encode($sendBack);
+              echo $response;
+
+            }
+          }else{}
+        }else{}
+
+        break;
+      case 'DeleteVisitorsType': 
+
+        if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){
+          if($privileges = $priv->GetUsersInfo('visitors', $userProfile) and $privileges >1 ){
+            if($resposneArray = $visitors->DeleteVisitorType($jobj[0]['id'])){
+               
+              $response = json_encode($resposneArray);
+              echo $response;
+
+
+            }else{ echo 'ea2';}
+          }else{ echo 'ea3 get profiles';}
+        }else{ echo 'ea4';}
+
+        break;
       case 'value':
         # code...
         break;

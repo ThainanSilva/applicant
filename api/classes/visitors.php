@@ -13,7 +13,7 @@ class visitors
       //================================= retorna os tipos de visitantes
       //=======================================================================================================
 
-
+  
       public function GetVisitorsProfiles($company_id, $Use_Global_Types)
       {
          try

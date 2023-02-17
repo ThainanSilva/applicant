@@ -17,7 +17,7 @@ if($m >= date('m') and $d >= date('d')and $y >= date('y')){
         }
 
 if($token = $user->newToken(2, 0, 1)){
-  if($user->SendTokenNewUser('flaviomre@gmail.com', $token, '5FCloud')){
+  if($user->SendTokenNewUser('thainan.nunes@nextecbrasil.com.br', $token, 'Nextec')){
     echo 'enviado';
   }else{
     echo 'não enviado';

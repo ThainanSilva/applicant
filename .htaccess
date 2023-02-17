@@ -2,3 +2,10 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Defina o pacote “ea-php56” como a linguagem padrão de programação “PHP”.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php56 .php .php5 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

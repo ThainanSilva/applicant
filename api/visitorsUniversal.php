@@ -1,15 +1,17 @@
-<?php
-
+ <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL); 
 require_once('../api/classes/db.php');
 require_once('../api/isLogged.php');
 require_once('../api/companycheck.php');
-
 include_once ('classes/visitors.php');
+//use visitors;
 $visitors = new visitors($db_connect); 
 
 include_once ('classes/utils.php');
-$utils = new utils($db_connect);
-
+$utils = new utils($db_connect); 
+header('Content-Type: application/json');
 if(isset($_POST['json']) and isset($_SESSION['company_id'])){
     $jobj =  json_decode($_POST['json'], true);
 
@@ -30,7 +32,6 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
               echo 'nok insert';
             }
           }
-
         }else{ echo 'ea3';}
       }else{ echo 'ea4';}
       break;
@@ -93,11 +94,13 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
                   $sendBack['activePage']= $requestPage;
                   $sendBack['Visitors']= $resposneArray;
                   $response = json_encode($sendBack);
-                  header('Content-type: application/json');
+                  header('Content-type: application/json'); 
                   echo $response;
                 }else{ 
-                  echo 're+========= '.$requestFrom; echo $utils->jsonfyresponse("5003","sem resposta");}
-              }else{}
+                    header('Content-Type: application/json');
+                    echo $utils->jsonfyresponse("error","sem resposta");}
+                  
+              }else{echo $utils->jsonfyResponse('error', 'Empty query result');}
             }else{ echo $utils->jsonfyresponse("5003","sem resposta");}
           }else{ echo 'ea3 get list';}
    
@@ -111,7 +114,7 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
                 echo $response;
 
 
-              }else{ echo 'ea2';}
+              }else{ echo '{"result":"error", "errorCode":"4565", "message":"Generic Problem"}';}
             }else{ echo 'ea3';}
           }else{ echo 'ea4';}
           break;
@@ -127,7 +130,7 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
               echo $response;
 
 
-            }else{ echo 'ea2';}
+            }else{ echo '{"result":"error", "errorCode":"4565", "message":"Generic Problem"}';}
           }else{ echo 'ea3 get profiles';}
         }else{ echo 'ea4';}
 
@@ -151,18 +154,50 @@ if(isset($_POST['json']) and isset($_SESSION['company_id'])){
           }else{}
         }else{}
 
-        break;
+        break; 
       case 'DeleteVisitorsType': 
+      
+        if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){
+          if($privileges = $priv->GetUsersInfo('visitors', $userProfile) and $privileges >2 ){
+            if( $visitors->checkVisitorUsing($_SESSION['company_id'],$jobj[0]['id'])){
+                $sendBack['result']= 'error';
+                $sendBack['message']= 'Existem Visitantes atribuidos a esse perfil!';
+                echo $response = json_encode($sendBack);
+              
+            }else{
+                if( $visitors->DeleteVisitorType($_SESSION['company_id'],$jobj[0]['id'])){
+                    $sendBack['result']= 'success';
+                    $sendBack['message']= 'Perfil removido com sucesso!';
+                    echo $response = json_encode($sendBack);
+                    
+               
+                  }else{ 
+                      $sendBack['result']= 'success';
+                        $sendBack['message']= 'Perfil removido com sucesso!';
+                    echo $response = json_encode($sendBack);
+                    
+                  }
+                
+            }
+          }else{ 
+              $sendBack['result']= 'error';
+              $sendBack['message']= 'Você não pode excluir isso!!';
+              
+              echo $response = json_encode($sendBack);
+              
+          }
+        }else{ echo 'ea4';}
+
+        break;
+      case 'value':
+        # code...
+        break;
+    
+          case 'newVisitorsType': 
 
         if($userProfile = $priv->getUserProfile($_SESSION['user_id'], $_SESSION['company_id'])){
           if($privileges = $priv->GetUsersInfo('visitors', $userProfile) and $privileges >1 ){
-            if($resposneArray = $visitors->DeleteVisitorType($jobj[0]['id'])){
-               
-              $response = json_encode($resposneArray);
-              echo $response;
-
-
-            }else{ echo 'ea2';}
+           
           }else{ echo 'ea3 get profiles';}
         }else{ echo 'ea4';}
 

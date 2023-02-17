@@ -1,3 +1,5 @@
+
+  
 $(document).ready(function() {
 
 
@@ -64,7 +66,7 @@ $(document).ready(function() {
             if ($("#login").val() == "") {
                 $('#login_execute').html('Entrar');
                 $('#login_execute').removeAttr("disabled");
-                $('#login').prop('title', 'Exemplo@5fcloud.com');
+                $('#login').prop('title', 'Exemplo@Nextec.app.br');
 
                 $("#login_fgroup").addClass("form-group has-error");
                 $("#login-name-pro").html('Email - não pode ficar em branco')
@@ -78,7 +80,7 @@ $(document).ready(function() {
             }
 
             if (triger == 1) {
-                exit();
+                
             }
 
 
@@ -90,7 +92,7 @@ $(document).ready(function() {
                 $('#login_execute').removeAttr("disabled");
                 $("#login_fgroup").addClass("form-group has-error");
                 $("#login-name-pro").html('Email - isso não é um email!')
-                $('#login').prop('title', 'Exemplo@5fcloud.com');
+                $('#login').prop('title', 'Exemplo@Nextecbrasil.com.br');
             } else {
 
 
@@ -111,22 +113,39 @@ $(document).ready(function() {
 
                 $.ajax({
                         method: "POST",
-                        url: "../api/authenticate.php",
+                        url: "api/authenticate.php",
                         data: { email: $('#login').val(), password: $('#password').val() }
                     })
                     .done(function(data) {
+                        toastr.options = {
+                            "closeButton": false,
+                            "debug": false,
+                            "newestOnTop": true,
+                            "progressBar": true,
+                            "positionClass": "toast-top-right",
+                            "preventDuplicates": false,
+                            "onclick": null,
+                            "showDuration": "300",
+                            "hideDuration": "1000",
+                            "timeOut": "5000",
+                            "extendedTimeOut": "1000",
+                            "showEasing": "swing",
+                            "hideEasing": "linear",
+                            "showMethod": "fadeIn",
+                            "hideMethod": "fadeOut" 
+                        }
                         $('#login_execute').removeAttr("disabled");
                         console.log(data)
                         obj = jQuery.parseJSON(data);
                         console.log(obj)
                         if (obj.result == 'success') {
-                            showNotification("", "Login efetuado!", "Redirecionando", "iconBgcollor");
+                            toastr.success('Login egetuado com sucesso, redirecionando');
                             setTimeout(function() {
-                                window.location.href = '../app/'; //do what you need here
+                                window.location.href = 'app/'; //do what you need here
                             }, 2000);
 
                         } else {
-                            showNotification("", obj.result, obj.message, "iconBgcollor");
+                            toastr.error( obj.message);
                         }
 
                         $('#login_execute').html('Entrar')

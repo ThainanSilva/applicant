@@ -72,7 +72,7 @@ $(document).ready(function(){
            $('#save_execute').html('Salvar');
            $('#save_execute').removeAttr("disabled");
            $("#nome_fgroup").addClass( "form-group has-error" );
-           $("#nome-name-pro").html('Nome - Incorreto')
+           $("#nome-name-pro").html('Nome - Incompleto')
            window.triger = 1
        }
        if($("#password").val() == ""){

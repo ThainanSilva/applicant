@@ -1,4 +1,9 @@
 <?php
+ 
+
+require_once "phpmailer/class.phpmailer.php"; 
+require_once 'utils.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/api/classes/db.php';
 class USER
 {
     private $db;
@@ -12,7 +17,7 @@ class USER
         //===============================================================================================================================
         public function getCompanyInfo($company_id)
         {
-           try
+           try 
            {
                $query = "SELECT * FROM company WHERE id = '".$company_id."' LIMIT 1";
                $sql = $this->db->prepare($query);
@@ -153,27 +158,40 @@ class USER
     //================================= envia email de cadastro de novo usuário =============================================
     //===============================================================================================================================
     public function SendTokenNewUser($to, $token, $company)
-    {
-        $subject = 'Cadastro AcessoCloud 5FCloud';
-        $headers = "From: no-reply@5fcloud.com\r\n";
-        $headers .= "Reply-To: no-reply@5fcloud.com\r\n";
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-        $message = '<html>
-        <body>
-        <div style="background: #333;height: 48px;">
-        <img style="margin-left: 10%;margin-top: 1%;height: 31px;" src="http://acessocloud.5fcloud.com/images/5fcloudlogosmall.png">
-        </div>
-        <br/>
-        <h1>Olá, bem vindo ao universo 5FCloud,<h1><h2> sua conta foi criada para acessar a empresa '.$company.', <h2>
-        <h4> Para ativar sua conta e cadastrar uma senha clique <a href="http://acessocloud.5fcloud.com/api/newUserFirstAuth.php?token='.$token.'" >aqui</a>
-        </body>
-        </html>';
-        if(mail($to, $subject, $message, $headers)){
-            return true;
-        } else{
+    { 
+
+ 
+ 
+        $msg = '<link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+                <center>
+
+                <div align="center" style="border: 1px solid #e8e8e8;border-radius: 5px;width: 93%;box-shadow: 0 0 10px -5px #a5a5a5;">
+                    <div>
+                        <img style="width: 187px;float: left;margin: 21px 0 0 15px;" src="http://nextecbrasil.com.br/wp-content/uploads/2019/11/lOGO-NEXTEC.fw_.png">
+                    </div> 
+                    <a style="    float: right;margin: 25px;    text-decoration: none;    color: #0095ff;" href="#"> Acessar o Site</a> 
+                    <div>
+                        <div style="border-bottom: 1px solid #efefef;margin-top: 76px;"></div>
+
+                        <img style="    clear: both;    display: block;" src="http://nextecbrasil.com.br/wp-content/uploads/2019/11/23.gif">
+                    </div>
+                    <div>
+                        <h2 style=" color: #4a4a4a;" >        Bem Vindo a Nextec        </h2>
+                        <div style="text-align: center;">
+
+                            <h3 style="margin: 10px;color: #616161;"> Olá, tudo bem?<br/></h3>
+
+                            <h3 style="margin: 10px;color: #616161;" > Você recebeu um convite para acessar a empresa: <b>' . $company . ',</b> <h3>
+                                <h4 style="margin: 10px;color: #616161;" > Para ativar sua conta e cadastrar uma senha clique <a href="http://aldeia.nextecbrasil.com.br/api/newUserFirstAuth.php?token=' . $token . '" >aqui</a></h4><br/><br/>
+                '; 
+      
+        $email = new utils($this->db);
+        if(!$email->sendmail($to, 'Nextec - Sistemas Inteligentes', $msg, true))
+        {        
             return false;
-        }
+        }else{
+            return true;    
+        } 
     }
     //===============================================================================================================================
     //================================= cria token =============================================
@@ -460,7 +478,8 @@ class USER
     {
        try
        {
-           $query = "SELECT * from Users where email = '".$uemail."' ";
+           $query = "SELECT * from Users where email = '".$uemail."' limit 1";
+           
            $sql = $this->db->prepare($query);
            $sql->execute();
            $resrow = $sql->fetchAll();
@@ -494,7 +513,7 @@ class USER
     {
        try
        {
-           session_start('usuario');
+           session_start();
           $stmt = $this->db->prepare("SELECT * FROM usuarios WHERE faceid = '".$fid."'");
           $stmt->execute();
           $userRow=$stmt->fetch(PDO::FETCH_ASSOC);
@@ -517,10 +536,13 @@ class USER
     //=================================  verifica se o usuario já está logado=============================================
     //===============================================================================================================================
     public function isLoggedIn()
-   {
+   {    
+ 
       if(isset($_SESSION['user_id']))
       {
          return true;
+      }else{
+          return false;
       }
    }
     //===============================================================================================================================

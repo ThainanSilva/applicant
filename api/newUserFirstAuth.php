@@ -1,5 +1,12 @@
 <?php
-require_once('classes/db.php');
+
+include_once $_SERVER['DOCUMENT_ROOT'].'/api/classes/users.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/api/classes/privileges.php';
+
+$user = new USER($db_connect);
+ 
+
+$priv = new privileges($db_connect);
 
 if(isset($_GET['token']) and $_GET['token'] != ""){
     if($user->checkTokenValid($_GET['token']) == "valid"){

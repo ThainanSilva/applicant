@@ -3,10 +3,11 @@ require_once('../api/classes/db.php');
 require_once('../api/isLogged.php');
 
 ?>
+<!DOCTYPE html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AcessoCloud - 5FCloud</title>
+  <title>AcessoCloud - Nextec</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -51,7 +52,7 @@ require_once('../api/isLogged.php');
     <p  id="UNmessage" > </p>
   </div>
 <div class="header-black">
-<a href="#" ><img  class="cflogo" src="../images/5fcloudlogosmall.png" / ></a>
+<a href="#" ><img  class="cflogo" src="../images/5fcloudlogosmall.png"></a>
 <div id="profile-Options">
 <a href="logOut.php">Sair</a>
 </div>
@@ -93,5 +94,5 @@ require_once('../api/isLogged.php');
   </div>
 
 <div id="footer">
-    Copyright © 2016 5F Cloud. Todos os direitos Reservados.
+    Copyright © 2016 Nextec. Todos os direitos Reservados.
 </div>

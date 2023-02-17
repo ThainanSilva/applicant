@@ -30,7 +30,7 @@ session_start();
     timeout: 6000, //time in miliseconds
     error:function(xhr){
       noConnection();
-      }
+      } 
     });
 
 
@@ -43,7 +43,7 @@ session_start();
     .done(function( data ) {
       console.log(data);
       window.visitorsReceiveobj = data;     
-      window.visitorsReceiveobj = jQuery.parseJSON(data);
+      window.visitorsReceiveobj = data;
       outptstring = "";    
       if(window.visitorsReceiveobj.result != "empty"){
         for (var k in window.visitorsReceiveobj){
@@ -67,29 +67,35 @@ session_start();
       $("#visitor_table tbody").html(outptstring)
 
       function DeleteVisitorType(idVisitorType) {        
-        console.log(idVisitorType);
+         
         $.ajaxSetup({
           timeout: 6000, //time in miliseconds
           error:function(xhr){
-            noConnection();
+              console.log(xhr)
+            toastr.error(xhr.responseText)
             }
           });
 
           $.ajax({
-            method: "POST",
+            method: "POST", 
             url: "../api/visitorsUniversal.php",            
             data:{json: '[{"function":"DeleteVisitorsType","id":"'+idVisitorType+'"}]'}            
           })
           
           .done(function( data ){
             loadvisitorsType();
-            console.log(data);
-            if(data == "true"){
-              console.log("entrou no if");
+            
+            if(data.result  === "error"){
+                toastr.error(data.message, 'O perfil não pode ser excluido.')
+              
+            }if(data.result  === "success"){
+                toastr.success(data.message)
               
             }
           })
       }
+      
+      
       $('.tipov').confirmation({
                 onConfirm: function() {
                   var idVisitorType = $(this).attr("visitorTypeId")
@@ -108,7 +114,7 @@ session_start();
 }
 
 </script>
-<script src="../js/bootstrap-confirmation.min.js"></script>
+
 <div class="panel panel-default customWindow" >
   <div class="panel-heading">Visitantes </div>
   <div class="panel-body">
@@ -116,8 +122,9 @@ session_start();
 <div class="row">
     <div class="col-lg-6">
   <div class="btn-group" role="group" aria-label="...">
-    <button  type="button" class="btn btn-success btn-outline" id="" data-toggle="modal" data-type='0' data-whatever="@mdo">
-  <i class="fa fa-user-plus" aria-hidden="true"></i>  Novo Visitante</button>    
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newvisitortype">
+  Novo tipo de Visitante
+</button>   
   </div> </div>
   <div class="col-lg-6">
 
@@ -139,3 +146,27 @@ session_start();
       </div>
     </div>
   </div>
+
+<!-- Modal Novo perfil-->
+                <div class="modal fade" id="newvisitortype" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Novo tipo de Visitante</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+ 
+        </button>
+      </div>
+      <div class="modal-body">
+          <label>Nome do tipo de visitante</label>
+          <input type="text" class="form-control" placeholder="Nome do tipo de visitante" id="Visitortypename" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Salvar Novo tipo de visitante</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+            

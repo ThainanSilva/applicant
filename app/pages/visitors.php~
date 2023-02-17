@@ -1,0 +1,172 @@
+<script type="text/javascript" src='./js/webcam.min.js'>
+</script>
+<script>
+$(document).ready(function(){
+    $.ajaxSetup({
+      timeout: 6000, //time in miliseconds
+      error:function(xhr){
+          noConnection();
+  }});
+  $.ajax({
+      method: "POST",
+      url: "../api/visitorsUniversal.php",
+      data:{json: '[{"function":"GetVisitorsList"}]'}
+      })
+  .done(function( data ) {
+
+    console.log(data)
+
+
+  //  jsonResponse = jQuery.parseJSON(data);
+    //  $("#loadingGif").remove();
+    //  $("#profilesOption").html('')
+    //  for (var k in jsonResponse) {
+      //  $("#profilesOption").append('<option value="'+jsonResponse[k].id+'">'+jsonResponse[k].name+'</option>')
+    //  }
+})
+
+})
+
+
+$("#capturePictureVisitor").click(function(){
+Webcam.set({
+    width:  229,
+    height: 175,
+    image_format: 'png',
+    force_flash: false
+});
+Webcam.attach( '#visitorVideoelm' );
+    
+    $("#capturepicvisitor").click(function() {
+        Webcam.snap( function(data_uri) {
+          window.snappictureVisitorSave = data_uri;
+          $("#visitorVideoelm").html('<img src="'+data_uri+'"/>');
+        } );
+    })
+
+})
+
+
+
+
+
+</script>
+<div class="panel panel-default customWindow" >
+  <div class="panel-heading">Visitantes </div>
+  <div class="panel-body">
+
+<div class="btn-group" role="group" aria-label="...">
+  <button  type="button" class="btn btn-success btn-outline" data-toggle="modal" data-target="#newVisitorModal" data-whatever="@mdo">
+<i class="fa fa-user-plus" aria-hidden="true"></i>  Novo Visitante</button>
+
+  <button type="button" class="btn btn-primary btn-outline  "><i class="fa fa-history" aria-hidden="true"></i> Ultimos acessos</button>
+  <div class="btn-group" role="group">
+    <button type="button" class="btn btn-info dropdown-toggle btn-outline" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> 
+      Mais
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#"><i class="fa fa-sign-in" aria-hidden="true"></i> Importar</a></li>
+      <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Expotar</a></li>
+    </ul>
+  </div>
+</div>
+<br/>
+<br/><br/>
+      <div id="visitors-table" class="bs-example usertable " data-example-id="simple-table">
+        <table class="table">
+          <thead>
+            <tr>
+
+              <th>Nome</th>
+              <th>Perfil de acesso</th>
+              <th>Opções</th>
+            </tr>
+          </thead>
+          <tbody >
+           </tbody>
+        </table>
+
+  </div>
+
+
+
+  </div>
+</div>
+
+
+
+
+
+
+<!-- Large modal -->
+<div class="modal fade bs-example-modal-lg" id="newVisitorModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="background-color: #337ab7;border-radius: 4px 4px 0 0; color: white;">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel">Novo Visitante</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <form>  
+          <div class="form-group col-md-4 "><!--- tipo de visitante -->
+            <label for="recipient-name" class="control-label">Tipo de Visitante:</label>
+            <select type="text" class="form-control" id="recipient-name">
+              <option></option>
+            </select>
+          </div><!--- fim tipo de visitante -->
+          <div class="form-group col-md-4"><!--- nome -->
+            <label for="message-text" class="control-label ">Nome:</label>
+            <Input type="text" class="form-control" id="message-text">
+          </div><!--- nome -->
+          <div class="form-group col-md-4" ><!--- CPF -->
+            <label for="message-text" class="control-label">CPF:</label>
+            <Input type="text" class="form-control" id="message-text" / >
+          </div><!--- fim CPF -->
+            <div class="form-group col-xs-6" ><!--- foto -->
+              <label for="message-text" style="display:block;" class=" ">Foto:</label>
+              <div style=" width: 240px; height: 185px;box-shadow: 0 0 27px -8px black;" class="img-thumbnail" ><div id="visitorVideoelm" style="
+    font-size: 184px;
+    text-align: center;
+    color: #d6e3ef;
+"><i class="fa fa-user" aria-hidden="true"></i>
+              </div></div>
+              <div style="
+    float: right;
+    margin-right: 44%;
+    margin-top: 11px;
+">
+                        <button type="button" class="btn btn-primary btn-outline" id="capturePictureVisitor" >Usar Foto</button>
+              <button type="button" class="btn btn-primary btn-outline" id="capturepicvisitor" >Capturar Foto</button>
+              </div>
+          </div><!--- fim foto -->
+          <div class="form-group clearfix " ><!--- foto -->
+            <div   id="visitorSnapElm" >
+            </div>
+          </div>
+          <div class="form-group " ><!--- foto -->
+           </div>
+           <div class="form-group " ><!--- foto -->
+  
+
+           </div>
+        </form>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+ 

@@ -1,0 +1,890 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Querying &#8212; Idiorm  documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Models" href="models.html" />
+    <link rel="prev" title="Configuration" href="configuration.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Idiorm  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Querying</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="querying">
+<h1>Querying<a class="headerlink" href="#querying" title="Permalink to this headline">¶</a></h1>
+<p>Idiorm provides a <a class="reference external" href="http://en.wikipedia.org/wiki/Fluent_interface">*fluent
+interface*</a> to enable
+simple queries to be built without writing a single character of SQL. If
+you’ve used <a class="reference external" href="http://jquery.com">jQuery</a> at all, you’ll be familiar
+with the concept of a fluent interface. It just means that you can
+<em>chain</em> method calls together, one after another. This can make your
+code more readable, as the method calls strung together in order can
+start to look a bit like a sentence.</p>
+<p>All Idiorm queries start with a call to the <code class="docutils literal notranslate"><span class="pre">for_table</span></code> static method
+on the ORM class. This tells the ORM which table to use when making the
+query.</p>
+<p><em>Note that this method **does not*</em> escape its query parameter and so
+the table name should <strong>not</strong> be passed directly from user input.*</p>
+<p>Method calls which add filters and constraints to your query are then
+strung together. Finally, the chain is finished by calling either
+<code class="docutils literal notranslate"><span class="pre">find_one()</span></code> or <code class="docutils literal notranslate"><span class="pre">find_many()</span></code>, which executes the query and returns
+the result.</p>
+<p>Let’s start with a simple example. Say we have a table called <code class="docutils literal notranslate"><span class="pre">person</span></code>
+which contains the columns <code class="docutils literal notranslate"><span class="pre">id</span></code> (the primary key of the record -
+Idiorm assumes the primary key column is called <code class="docutils literal notranslate"><span class="pre">id</span></code> but this is
+configurable, see below), <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">gender</span></code>.</p>
+<div class="section" id="a-note-on-psr-1-and-camelcase">
+<h2>A note on PSR-1 and camelCase<a class="headerlink" href="#a-note-on-psr-1-and-camelcase" title="Permalink to this headline">¶</a></h2>
+<p>All the methods detailed in the documentation can also be called in a PSR-1 way:
+underscores (_) become camelCase. Here follows an example of one query chain
+being converted to a PSR-1 compliant style.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// documented and default style</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Fred Bloggs&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_one</span><span class="p">();</span>
+
+<span class="c1">// PSR-1 compliant style</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">forTable</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Fred Bloggs&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">findOne</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>As you can see any method can be changed from the documented underscore (_) format
+to that of a camelCase method name.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In the background the PSR-1 compliant style uses the <cite>__call()</cite> and
+<cite>__callStatic()</cite> magic methods to map the camelCase method name you supply
+to the original underscore method name. It then uses <cite>call_user_func_array()</cite>
+to apply the arguments to the method. If this minimal overhead is too great
+then you can simply revert to using the underscore methods to avoid it. In
+general this will not be a bottle neck in any application however and should
+be considered a micro-optimisation.</p>
+<p>As <cite>__callStatic()</cite> was added in PHP 5.3.0 you will need at least that version
+of PHP to use this feature in any meaningful way.</p>
+</div>
+</div>
+<div class="section" id="single-records">
+<h2>Single records<a class="headerlink" href="#single-records" title="Permalink to this headline">¶</a></h2>
+<p>Any method chain that ends in <code class="docutils literal notranslate"><span class="pre">find_one()</span></code> will return either a
+<em>single</em> instance of the ORM class representing the database row you
+requested, or <code class="docutils literal notranslate"><span class="pre">false</span></code> if no matching record was found.</p>
+<p>To find a single record where the <code class="docutils literal notranslate"><span class="pre">name</span></code> column has the value “Fred
+Bloggs”:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Fred Bloggs&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_one</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This roughly translates into the following SQL:
+<code class="docutils literal notranslate"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">person</span> <span class="pre">WHERE</span> <span class="pre">name</span> <span class="pre">=</span> <span class="pre">&quot;Fred</span> <span class="pre">Bloggs&quot;</span></code></p>
+<p>To find a single record by ID, you can pass the ID directly to the
+<code class="docutils literal notranslate"><span class="pre">find_one</span></code> method:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_one</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If you are using a compound primary key, you can find the records
+using an array as the parameter:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$person</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;user_role&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_one</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">34</span><span class="p">,</span>
+    <span class="s1">&#39;role_id&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span>
+<span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-records">
+<h2>Multiple records<a class="headerlink" href="#multiple-records" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is recommended that you use results sets over arrays - see <cite>As a result set</cite>
+below.</p>
+</div>
+<p>Any method chain that ends in <code class="docutils literal notranslate"><span class="pre">find_many()</span></code> will return an <em>array</em> of
+ORM class instances, one for each row matched by your query. If no rows
+were found, an empty array will be returned.</p>
+<p>To find all records in the table:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>To find all records where the <code class="docutils literal notranslate"><span class="pre">gender</span></code> is <code class="docutils literal notranslate"><span class="pre">female</span></code>:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$females</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="section" id="as-a-result-set">
+<h3>As a result set<a class="headerlink" href="#as-a-result-set" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is a configuration setting <code class="docutils literal notranslate"><span class="pre">return_result_sets</span></code> that will cause
+<code class="docutils literal notranslate"><span class="pre">find_many()</span></code> to return result sets by default. It is recommended that you
+turn this setting on:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ORM</span><span class="p">::</span><span class="n">configure</span><span class="p">(</span><span class="s1">&#39;return_result_sets&#39;</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<p>You can also find many records as a result set instead of an array of Idiorm
+instances. This gives you the advantage that you can run batch operations on a
+set of results.</p>
+<p>So for example instead of running this:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$people</span> <span class="k">as</span> <span class="nv">$person</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$person</span><span class="o">-&gt;</span><span class="na">age</span> <span class="o">=</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="nv">$person</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can simply do this instead:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_result_set</span><span class="p">()</span>
+<span class="o">-&gt;</span><span class="na">set</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>To do this substitute any call to <code class="docutils literal notranslate"><span class="pre">find_many()</span></code> with
+<code class="docutils literal notranslate"><span class="pre">find_result_set()</span></code>.</p>
+<p>A result set will also behave like an array so you can <cite>count()</cite> it and <cite>foreach</cite>
+over it just like an array.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">foreach</span><span class="p">(</span><span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_result_set</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$record</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$record</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nb">count</span><span class="p">(</span><span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_result_set</span><span class="p">());</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For deleting many records it is recommended that you use <cite>delete_many()</cite> as it
+is more efficient than calling <cite>delete()</cite> on a result set.</p>
+</div>
+</div>
+<div class="section" id="as-an-associative-array">
+<h3>As an associative array<a class="headerlink" href="#as-an-associative-array" title="Permalink to this headline">¶</a></h3>
+<p>You can also find many records as an associative array instead of Idiorm
+instances. To do this substitute any call to <code class="docutils literal notranslate"><span class="pre">find_many()</span></code> with
+<code class="docutils literal notranslate"><span class="pre">find_array()</span></code>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$females</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_array</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This is useful if you need to serialise the the query output into a
+format like JSON and you do not need the ability to update the returned
+records.</p>
+</div>
+</div>
+<div class="section" id="counting-results">
+<h2>Counting results<a class="headerlink" href="#counting-results" title="Permalink to this headline">¶</a></h2>
+<p>To return a count of the number of rows that would be returned by a
+query, call the <code class="docutils literal notranslate"><span class="pre">count()</span></code> method.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$number_of_people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">count</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="filtering-results">
+<h2>Filtering results<a class="headerlink" href="#filtering-results" title="Permalink to this headline">¶</a></h2>
+<p>Idiorm provides a family of methods to extract only records which
+satisfy some condition or conditions. These methods may be called
+multiple times to build up your query, and Idiorm’s fluent interface
+allows method calls to be <em>chained</em> to create readable and
+simple-to-understand queries.</p>
+<div class="section" id="caveats">
+<h3><em>Caveats</em><a class="headerlink" href="#caveats" title="Permalink to this headline">¶</a></h3>
+<p>Only a subset of the available conditions supported by SQL are available
+when using Idiorm. Additionally, all the <code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clauses will be
+<code class="docutils literal notranslate"><span class="pre">AND</span></code>ed together when the query is run. Support for <code class="docutils literal notranslate"><span class="pre">OR</span></code>ing
+<code class="docutils literal notranslate"><span class="pre">WHERE</span></code> clauses is not currently present.</p>
+<p>These limits are deliberate: these are by far the most commonly used
+criteria, and by avoiding support for very complex queries, the Idiorm
+codebase can remain small and simple.</p>
+<p>Some support for more complex conditions and queries is provided by the
+<code class="docutils literal notranslate"><span class="pre">where_raw</span></code> and <code class="docutils literal notranslate"><span class="pre">raw_query</span></code> methods (see below). If you find
+yourself regularly requiring more functionality than Idiorm can provide,
+it may be time to consider using a more full-featured ORM.</p>
+</div>
+<div class="section" id="equality-where-where-equal-where-not-equal">
+<h3>Equality: <code class="docutils literal notranslate"><span class="pre">where</span></code>, <code class="docutils literal notranslate"><span class="pre">where_equal</span></code>, <code class="docutils literal notranslate"><span class="pre">where_not_equal</span></code><a class="headerlink" href="#equality-where-where-equal-where-not-equal" title="Permalink to this headline">¶</a></h3>
+<p>By default, calling <code class="docutils literal notranslate"><span class="pre">where</span></code> with two parameters (the column name and
+the value) will combine them using an equals operator (<code class="docutils literal notranslate"><span class="pre">=</span></code>). For
+example, calling <code class="docutils literal notranslate"><span class="pre">where('name',</span> <span class="pre">'Fred')</span></code> will result in the clause
+<code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">name</span> <span class="pre">=</span> <span class="pre">&quot;Fred&quot;</span></code>.</p>
+<p>If your coding style favours clarity over brevity, you may prefer to use
+the <code class="docutils literal notranslate"><span class="pre">where_equal</span></code> method: this is identical to <code class="docutils literal notranslate"><span class="pre">where</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">where_not_equal</span></code> method adds a <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">column</span> <span class="pre">!=</span> <span class="pre">&quot;value&quot;</span></code> clause
+to your query.</p>
+<p>You can specify multiple columns and their values in the same call. In this
+case you should pass an associative array as the first parameter. The array
+notation uses keys as column names.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fred&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">20</span>
+            <span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+
+<span class="c1">// Creates SQL:</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`person`</span> <span class="nx">WHERE</span> <span class="sb">`name`</span> <span class="o">=</span> <span class="s2">&quot;Fred&quot;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">=</span> <span class="s2">&quot;20&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="shortcut-where-id-is">
+<h3>Shortcut: <code class="docutils literal notranslate"><span class="pre">where_id_is</span></code><a class="headerlink" href="#shortcut-where-id-is" title="Permalink to this headline">¶</a></h3>
+<p>This is a simple helper method to query the table by primary key.
+Respects the ID column specified in the config. If you are using a compound
+primary key, you must pass an array where the key is the column name. Columns
+that don’t belong to the key will be ignored.</p>
+</div>
+<div class="section" id="shortcut-where-id-in">
+<h3>Shortcut: <code class="docutils literal notranslate"><span class="pre">where_id_in</span></code><a class="headerlink" href="#shortcut-where-id-in" title="Permalink to this headline">¶</a></h3>
+<p>This helper method is similar to <a href="#id1"><span class="problematic" id="id2">``</span></a>where_id_is`, but it expects an array of
+primary keys to be selected. It is compound primary keys aware.</p>
+</div>
+<div class="section" id="less-than-greater-than-where-lt-where-gt-where-lte-where-gte">
+<h3>Less than / greater than: <code class="docutils literal notranslate"><span class="pre">where_lt</span></code>, <code class="docutils literal notranslate"><span class="pre">where_gt</span></code>, <code class="docutils literal notranslate"><span class="pre">where_lte</span></code>, <code class="docutils literal notranslate"><span class="pre">where_gte</span></code><a class="headerlink" href="#less-than-greater-than-where-lt-where-gt-where-lte-where-gte" title="Permalink to this headline">¶</a></h3>
+<p>There are four methods available for inequalities:</p>
+<ul class="simple">
+<li><p>Less than:
+<code class="docutils literal notranslate"><span class="pre">$people</span> <span class="pre">=</span> <span class="pre">ORM::for_table('person')-&gt;where_lt('age',</span> <span class="pre">10)-&gt;find_many();</span></code></p></li>
+<li><p>Greater than:
+<code class="docutils literal notranslate"><span class="pre">$people</span> <span class="pre">=</span> <span class="pre">ORM::for_table('person')-&gt;where_gt('age',</span> <span class="pre">5)-&gt;find_many();</span></code></p></li>
+<li><p>Less than or equal:
+<code class="docutils literal notranslate"><span class="pre">$people</span> <span class="pre">=</span> <span class="pre">ORM::for_table('person')-&gt;where_lte('age',</span> <span class="pre">10)-&gt;find_many();</span></code></p></li>
+<li><p>Greater than or equal:
+<code class="docutils literal notranslate"><span class="pre">$people</span> <span class="pre">=</span> <span class="pre">ORM::for_table('person')-&gt;where_gte('age',</span> <span class="pre">5)-&gt;find_many();</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="string-comparision-where-like-and-where-not-like">
+<h3>String comparision: <code class="docutils literal notranslate"><span class="pre">where_like</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_like</span></code><a class="headerlink" href="#string-comparision-where-like-and-where-not-like" title="Permalink to this headline">¶</a></h3>
+<p>To add a <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">...</span> <span class="pre">LIKE</span></code> clause, use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where_like</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;%fred%&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Similarly, to add a <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">...</span> <span class="pre">NOT</span> <span class="pre">LIKE</span></code> clause, use:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where_not_like</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;%bob%&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="multiple-or-ed-conditions">
+<h3>Multiple OR’ed conditions<a class="headerlink" href="#multiple-or-ed-conditions" title="Permalink to this headline">¶</a></h3>
+<p>You can add simple OR’ed conditions to the same WHERE clause using <code class="docutils literal notranslate"><span class="pre">where_any_is</span></code>. You
+should specify multiple conditions using an array of items. Each item will be an
+associative array that contains a multiple conditions.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where_any_is</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">),</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)))</span>
+            <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+
+<span class="c1">// Creates SQL:</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`widget`</span> <span class="nx">WHERE</span> <span class="p">((</span> <span class="sb">`name`</span> <span class="o">=</span> <span class="s1">&#39;Joe&#39;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span> <span class="p">)</span> <span class="k">OR</span> <span class="p">(</span> <span class="sb">`name`</span> <span class="o">=</span> <span class="s1">&#39;Fred&#39;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">=</span> <span class="s1">&#39;20&#39;</span> <span class="p">));</span>
+</pre></div>
+</div>
+<p>By default, it uses the equal operator for every column, but it can be overriden for any
+column using a second parameter:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where_any_is</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">),</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)),</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+
+<span class="c1">// Creates SQL:</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`widget`</span> <span class="nx">WHERE</span> <span class="p">((</span> <span class="sb">`name`</span> <span class="o">=</span> <span class="s1">&#39;Joe&#39;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">=</span> <span class="s1">&#39;10&#39;</span> <span class="p">)</span> <span class="k">OR</span> <span class="p">(</span> <span class="sb">`name`</span> <span class="o">=</span> <span class="s1">&#39;Fred&#39;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">&gt;</span> <span class="s1">&#39;20&#39;</span> <span class="p">));</span>
+</pre></div>
+</div>
+<p>If you want to set the default operator for all the columns, just pass it as the second parameter:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where_any_is</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;score&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">10</span><span class="p">),</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;score&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;15&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span> <span class="o">=&gt;</span> <span class="mi">20</span><span class="p">)),</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+
+<span class="c1">// Creates SQL:</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`widget`</span> <span class="nx">WHERE</span> <span class="p">((</span> <span class="sb">`score`</span> <span class="o">&gt;</span> <span class="s1">&#39;5&#39;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">&gt;</span> <span class="s1">&#39;10&#39;</span> <span class="p">)</span> <span class="k">OR</span> <span class="p">(</span> <span class="sb">`score`</span> <span class="o">&gt;</span> <span class="s1">&#39;15&#39;</span> <span class="k">AND</span> <span class="sb">`age`</span> <span class="o">&gt;</span> <span class="s1">&#39;20&#39;</span> <span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="set-membership-where-in-and-where-not-in">
+<h3>Set membership: <code class="docutils literal notranslate"><span class="pre">where_in</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_in</span></code><a class="headerlink" href="#set-membership-where-in-and-where-not-in" title="Permalink to this headline">¶</a></h3>
+<p>To add a <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">...</span> <span class="pre">IN</span> <span class="pre">()</span></code> or <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">...</span> <span class="pre">NOT</span> <span class="pre">IN</span> <span class="pre">()</span></code> clause, use the
+<code class="docutils literal notranslate"><span class="pre">where_in</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_in</span></code> methods respectively.</p>
+<p>Both methods accept two arguments. The first is the column name to
+compare against. The second is an <em>array</em> of possible values. As all the
+<code class="docutils literal notranslate"><span class="pre">where_</span></code> methods, you can specify multiple columns using an associative
+<em>array</em> as the only parameter.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where_in</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;Joe&#39;</span><span class="p">,</span> <span class="s1">&#39;John&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-null-values-where-null-and-where-not-null">
+<h3>Working with <code class="docutils literal notranslate"><span class="pre">NULL</span></code> values: <code class="docutils literal notranslate"><span class="pre">where_null</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_null</span></code><a class="headerlink" href="#working-with-null-values-where-null-and-where-not-null" title="Permalink to this headline">¶</a></h3>
+<p>To add a <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">column</span> <span class="pre">IS</span> <span class="pre">NULL</span></code> or <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">column</span> <span class="pre">IS</span> <span class="pre">NOT</span> <span class="pre">NULL</span></code>
+clause, use the <code class="docutils literal notranslate"><span class="pre">where_null</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_null</span></code> methods
+respectively. Both methods accept a single parameter: the column name to
+test.</p>
+</div>
+<div class="section" id="raw-where-clauses">
+<h3>Raw WHERE clauses<a class="headerlink" href="#raw-where-clauses" title="Permalink to this headline">¶</a></h3>
+<p>If you require a more complex query, you can use the <code class="docutils literal notranslate"><span class="pre">where_raw</span></code>
+method to specify the SQL fragment for the WHERE clause exactly. This
+method takes two arguments: the string to add to the query, and an
+(optional) array of parameters which will be bound to the string. If
+parameters are supplied, the string should contain question mark
+characters (<code class="docutils literal notranslate"><span class="pre">?</span></code>) to represent the values to be bound, and the
+parameter array should contain the values to be substituted into the
+string in the correct order.</p>
+<p>This method may be used in a method chain alongside other <code class="docutils literal notranslate"><span class="pre">where_*</span></code>
+methods as well as methods such as <code class="docutils literal notranslate"><span class="pre">offset</span></code>, <code class="docutils literal notranslate"><span class="pre">limit</span></code> and
+<code class="docutils literal notranslate"><span class="pre">order_by_*</span></code>. The contents of the string you supply will be connected
+with preceding and following WHERE clauses with AND.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;Fred&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">where_raw</span><span class="p">(</span><span class="s1">&#39;(`age` = ? OR `age` = ?)&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">order_by_asc</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+
+<span class="c1">// Creates SQL:</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`person`</span> <span class="nx">WHERE</span> <span class="sb">`name`</span> <span class="o">=</span> <span class="s2">&quot;Fred&quot;</span> <span class="k">AND</span> <span class="p">(</span><span class="sb">`age`</span> <span class="o">=</span> <span class="mi">20</span> <span class="k">OR</span> <span class="sb">`age`</span> <span class="o">=</span> <span class="mi">25</span><span class="p">)</span> <span class="nx">ORDER</span> <span class="nx">BY</span> <span class="sb">`name`</span> <span class="nx">ASC</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You must wrap your expression in parentheses when using any of <code class="docutils literal notranslate"><span class="pre">ALL</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ANY</span></code>, <code class="docutils literal notranslate"><span class="pre">BETWEEN</span></code>, <code class="docutils literal notranslate"><span class="pre">IN</span></code>, <code class="docutils literal notranslate"><span class="pre">LIKE</span></code>, <code class="docutils literal notranslate"><span class="pre">OR</span></code> and <code class="docutils literal notranslate"><span class="pre">SOME</span></code>. Otherwise
+the precedence of <code class="docutils literal notranslate"><span class="pre">AND</span></code> will bind stronger and in the above example
+you would effectively get <code class="docutils literal notranslate"><span class="pre">WHERE</span> <span class="pre">(`name`</span> <span class="pre">=</span> <span class="pre">&quot;Fred&quot;</span> <span class="pre">AND</span> <span class="pre">`age`</span> <span class="pre">=</span> <span class="pre">20)</span> <span class="pre">OR</span> <span class="pre">`age`</span> <span class="pre">=</span> <span class="pre">25</span></code></p>
+</div>
+<p>Note that this method only supports “question mark placeholder” syntax,
+and NOT “named placeholder” syntax. This is because PDO does not allow
+queries that contain a mixture of placeholder types. Also, you should
+ensure that the number of question mark placeholders in the string
+exactly matches the number of elements in the array.</p>
+<p>If you require yet more flexibility, you can manually specify the entire
+query. See <em>Raw queries</em> below.</p>
+</div>
+<div class="section" id="limits-and-offsets">
+<h3>Limits and offsets<a class="headerlink" href="#limits-and-offsets" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that these methods **do not*</em> escape their query parameters and so
+these should <strong>not</strong> be passed directly from user input.*</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">limit</span></code> and <code class="docutils literal notranslate"><span class="pre">offset</span></code> methods map pretty closely to their SQL
+equivalents.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">offset</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ordering">
+<h3>Ordering<a class="headerlink" href="#ordering" title="Permalink to this headline">¶</a></h3>
+<p><em>Note that these methods **do not*</em> escape their query parameters and so
+these should <strong>not</strong> be passed directly from user input.*</p>
+<p>Two methods are provided to add <code class="docutils literal notranslate"><span class="pre">ORDER</span> <span class="pre">BY</span></code> clauses to your query.
+These are <code class="docutils literal notranslate"><span class="pre">order_by_desc</span></code> and <code class="docutils literal notranslate"><span class="pre">order_by_asc</span></code>, each of which takes a
+column name to sort by. The column names will be quoted.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">order_by_asc</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">order_by_desc</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If you want to order by something other than a column name, then use the
+<code class="docutils literal notranslate"><span class="pre">order_by_expr</span></code> method to add an unquoted SQL expression as an
+<code class="docutils literal notranslate"><span class="pre">ORDER</span> <span class="pre">BY</span></code> clause.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">order_by_expr</span><span class="p">(</span><span class="s1">&#39;SOUNDEX(`name`)&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="grouping">
+<h2>Grouping<a class="headerlink" href="#grouping" title="Permalink to this headline">¶</a></h2>
+<p><em>Note that this method **does not*</em> escape it query parameter and so
+this should <strong>not</strong> by passed directly from user input.*</p>
+<p>To add a <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> clause to your query, call the <code class="docutils literal notranslate"><span class="pre">group_by</span></code>
+method, passing in the column name. You can call this method multiple
+times to add further columns.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">group_by</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>It is also possible to <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> a database expression:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;gender&#39;</span><span class="p">,</span> <span class="s1">&#39;female&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">group_by_expr</span><span class="p">(</span><span class="s2">&quot;FROM_UNIXTIME(`time`, &#39;%Y-%m&#39;)&quot;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="having">
+<h2>Having<a class="headerlink" href="#having" title="Permalink to this headline">¶</a></h2>
+<p>When using aggregate functions in combination with a <code class="docutils literal notranslate"><span class="pre">GROUP</span> <span class="pre">BY</span></code> you can use
+<code class="docutils literal notranslate"><span class="pre">HAVING</span></code> to filter based on those values.</p>
+<p><code class="docutils literal notranslate"><span class="pre">HAVING</span></code> works in exactly the same way as all of the <code class="docutils literal notranslate"><span class="pre">where*</span></code> functions in Idiorm.
+Substitute <code class="docutils literal notranslate"><span class="pre">where_</span></code> for <code class="docutils literal notranslate"><span class="pre">having_</span></code> to make use of these functions.</p>
+<p>For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">group_by</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">having_not_like</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;%bob%&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="result-columns">
+<h2>Result columns<a class="headerlink" href="#result-columns" title="Permalink to this headline">¶</a></h2>
+<p>By default, all columns in the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement are returned from
+your query. That is, calling:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">select</span></code> method gives you control over which columns are returned.
+Call <code class="docutils literal notranslate"><span class="pre">select</span></code> multiple times to specify columns to return or use
+<code class="docutils literal notranslate"><span class="pre">`select_many</span></code> &lt;#shortcuts-for-specifying-many-columns&gt;`_ to specify
+many columns at once.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`age`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Optionally, you may also supply a second argument to <code class="docutils literal notranslate"><span class="pre">select</span></code> to
+specify an alias for the column:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;person_name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="sb">`name`</span> <span class="k">AS</span> <span class="sb">`person_name`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Column names passed to <code class="docutils literal notranslate"><span class="pre">select</span></code> are quoted automatically, even if they
+contain <code class="docutils literal notranslate"><span class="pre">table.column</span></code>-style identifiers:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;person.name&#39;</span><span class="p">,</span> <span class="s1">&#39;person_name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="sb">`person`</span><span class="o">.</span><span class="sb">`name`</span> <span class="k">AS</span> <span class="sb">`person_name`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>If you wish to override this behaviour (for example, to supply a
+database expression) you should instead use the <code class="docutils literal notranslate"><span class="pre">select_expr</span></code> method.
+Again, this takes the alias as an optional second argument. You can
+specify multiple expressions by calling <code class="docutils literal notranslate"><span class="pre">select_expr</span></code> multiple times
+or use <code class="docutils literal notranslate"><span class="pre">`select_many_expr</span></code> &lt;#shortcuts-for-specifying-many-columns&gt;`_
+to specify many expressions at once.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// NOTE: For illustrative purposes only. To perform a count query, use the count() method.</span>
+<span class="nv">$people_count</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select_expr</span><span class="p">(</span><span class="s1">&#39;COUNT(*)&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="nx">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="sb">`count`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="section" id="shortcuts-for-specifying-many-columns">
+<h3>Shortcuts for specifying many columns<a class="headerlink" href="#shortcuts-for-specifying-many-columns" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">select_many</span></code> and <code class="docutils literal notranslate"><span class="pre">select_many_expr</span></code> are very similar, but they
+allow you to specify more than one column at once. For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select_many</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`age`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To specify aliases you need to pass in an array (aliases are set as the
+key in an associative array):</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select_many</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;first_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;name&#39;</span><span class="p">),</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="sb">`name`</span> <span class="k">AS</span> <span class="sb">`first_name`</span><span class="p">,</span> <span class="sb">`age`</span><span class="p">,</span> <span class="sb">`height`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>You can pass the the following styles into <code class="docutils literal notranslate"><span class="pre">select_many</span></code> and
+<code class="docutils literal notranslate"><span class="pre">select_many_expr</span></code> by mixing and matching arrays and parameters:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">select_many</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;alias&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;column&#39;</span><span class="p">,</span> <span class="s1">&#39;column2&#39;</span><span class="p">,</span> <span class="s1">&#39;alias2&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;column3&#39;</span><span class="p">),</span> <span class="s1">&#39;column4&#39;</span><span class="p">,</span> <span class="s1">&#39;column5&#39;</span><span class="p">)</span>
+<span class="nx">select_many</span><span class="p">(</span><span class="s1">&#39;column&#39;</span><span class="p">,</span> <span class="s1">&#39;column2&#39;</span><span class="p">,</span> <span class="s1">&#39;column3&#39;</span><span class="p">)</span>
+<span class="nx">select_many</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="s1">&#39;column&#39;</span><span class="p">,</span> <span class="s1">&#39;column2&#39;</span><span class="p">,</span> <span class="s1">&#39;column3&#39;</span><span class="p">),</span> <span class="s1">&#39;column4&#39;</span><span class="p">,</span> <span class="s1">&#39;column5&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>All the select methods can also be chained with each other so you could
+do the following to get a neat select query including an expression:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select_many</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select_expr</span><span class="p">(</span><span class="s1">&#39;NOW()&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="sb">`name`</span><span class="p">,</span> <span class="sb">`age`</span><span class="p">,</span> <span class="sb">`height`</span><span class="p">,</span> <span class="nx">NOW</span><span class="p">()</span> <span class="k">AS</span> <span class="sb">`timestamp`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="distinct">
+<h2>DISTINCT<a class="headerlink" href="#distinct" title="Permalink to this headline">¶</a></h2>
+<p>To add a <code class="docutils literal notranslate"><span class="pre">DISTINCT</span></code> keyword before the list of result columns in your
+query, add a call to <code class="docutils literal notranslate"><span class="pre">distinct()</span></code> to your query chain.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$distinct_names</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">distinct</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This will result in the query:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nx">SELECT</span> <span class="nx">DISTINCT</span> <span class="sb">`name`</span> <span class="nx">FROM</span> <span class="sb">`person`</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="joins">
+<h2>Joins<a class="headerlink" href="#joins" title="Permalink to this headline">¶</a></h2>
+<p>Idiorm has a family of methods for adding different types of <code class="docutils literal notranslate"><span class="pre">JOIN</span></code>s
+to the queries it constructs:</p>
+<p>Methods: <code class="docutils literal notranslate"><span class="pre">join</span></code>, <code class="docutils literal notranslate"><span class="pre">inner_join</span></code>, <code class="docutils literal notranslate"><span class="pre">left_outer_join</span></code>,
+<code class="docutils literal notranslate"><span class="pre">right_outer_join</span></code>, <code class="docutils literal notranslate"><span class="pre">full_outer_join</span></code>.</p>
+<p>Each of these methods takes the same set of arguments. The following
+description will use the basic <code class="docutils literal notranslate"><span class="pre">join</span></code> method as an example, but the
+same applies to each method.</p>
+<p>The first two arguments are mandatory. The first is the name of the
+table to join, and the second supplies the conditions for the join. The
+recommended way to specify the conditions is as an <em>array</em> containing
+three components: the first column, the operator, and the second column.
+The table and column names will be automatically quoted. For example:</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;person_profile&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;person.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;person_profile.person_id&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>It is also possible to specify the condition as a string, which will be
+inserted as-is into the query. However, in this case the column names
+will <strong>not</strong> be escaped, and so this method should be used with caution.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// Not recommended because the join condition will not be escaped.</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;person_profile&#39;</span><span class="p">,</span> <span class="s1">&#39;person.id = person_profile.person_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">join</span></code> methods also take an optional third parameter, which is an
+<code class="docutils literal notranslate"><span class="pre">alias</span></code> for the table in the query. This is useful if you wish to join
+the table to <em>itself</em> to create a hierarchical structure. In this case,
+it is best combined with the <code class="docutils literal notranslate"><span class="pre">table_alias</span></code> method, which will add an
+alias to the <em>main</em> table associated with the ORM, and the <code class="docutils literal notranslate"><span class="pre">select</span></code>
+method to control which columns get returned.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">table_alias</span><span class="p">(</span><span class="s1">&#39;p1&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;p1.*&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;p2.name&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_name&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">join</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;p1.parent&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;p2.id&#39;</span><span class="p">),</span> <span class="s1">&#39;p2&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="section" id="raw-join-clauses">
+<h3>Raw JOIN clauses<a class="headerlink" href="#raw-join-clauses" title="Permalink to this headline">¶</a></h3>
+<p>If you need to construct a more complex query, you can use the <code class="docutils literal notranslate"><span class="pre">raw_join</span></code>
+method to specify the SQL fragment for the JOIN clause exactly. This
+method takes four required arguments: the string to add to the query,
+the conditions is as an <em>array</em> containing three components:
+the first column, the operator, and the second column, the table alias and
+(optional) the parameters array. If parameters are supplied,
+the string should contain question mark characters (<code class="docutils literal notranslate"><span class="pre">?</span></code>) to represent
+the values to be bound, and the parameter array should contain the values
+to be substituted into the string in the correct order.</p>
+<p>This method may be used in a method chain alongside other <code class="docutils literal notranslate"><span class="pre">*_join</span></code>
+methods as well as methods such as <code class="docutils literal notranslate"><span class="pre">offset</span></code>, <code class="docutils literal notranslate"><span class="pre">limit</span></code> and
+<code class="docutils literal notranslate"><span class="pre">order_by_*</span></code>. The contents of the string you supply will be connected
+with preceding and following JOIN clauses.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">raw_join</span><span class="p">(</span>
+                <span class="s1">&#39;JOIN (SELECT * FROM role WHERE role.name = ?)&#39;</span><span class="p">,</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;person.role_id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;role.id&#39;</span><span class="p">),</span>
+                <span class="s1">&#39;role&#39;</span><span class="p">,</span>
+                <span class="k">array</span><span class="p">(</span><span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;janitor&#39;</span><span class="p">))</span>
+            <span class="o">-&gt;</span><span class="na">order_by_asc</span><span class="p">(</span><span class="s1">&#39;person.name&#39;</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+
+<span class="c1">// Creates SQL:</span>
+<span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="sb">`person`</span> <span class="nx">JOIN</span> <span class="p">(</span><span class="nx">SELECT</span> <span class="o">*</span> <span class="nx">FROM</span> <span class="nx">role</span> <span class="nx">WHERE</span> <span class="nx">role</span><span class="o">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;janitor&#39;</span><span class="p">)</span> <span class="sb">`role`</span> <span class="nx">ON</span> <span class="sb">`person`</span><span class="o">.</span><span class="sb">`role_id`</span> <span class="o">=</span> <span class="sb">`role`</span><span class="o">.</span><span class="sb">`id`</span> <span class="nx">ORDER</span> <span class="nx">BY</span> <span class="sb">`person`</span><span class="o">.</span><span class="sb">`name`</span> <span class="nx">ASC</span>
+</pre></div>
+</div>
+<p>Note that this method only supports “question mark placeholder” syntax,
+and NOT “named placeholder” syntax. This is because PDO does not allow
+queries that contain a mixture of placeholder types. Also, you should
+ensure that the number of question mark placeholders in the string
+exactly matches the number of elements in the array.</p>
+<p>If you require yet more flexibility, you can manually specify the entire
+query. See <em>Raw queries</em> below.</p>
+</div>
+</div>
+<div class="section" id="aggregate-functions">
+<h2>Aggregate functions<a class="headerlink" href="#aggregate-functions" title="Permalink to this headline">¶</a></h2>
+<p>There is support for <code class="docutils literal notranslate"><span class="pre">MIN</span></code>, <code class="docutils literal notranslate"><span class="pre">AVG</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX</span></code> and <code class="docutils literal notranslate"><span class="pre">SUM</span></code> in addition
+to <code class="docutils literal notranslate"><span class="pre">COUNT</span></code> (documented earlier).</p>
+<p>To return a minimum value of column, call the <code class="docutils literal notranslate"><span class="pre">min()</span></code> method.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$min</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">min</span><span class="p">(</span><span class="s1">&#39;height&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The other functions (<code class="docutils literal notranslate"><span class="pre">AVG</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX</span></code> and <code class="docutils literal notranslate"><span class="pre">SUM</span></code>) work in exactly the
+same manner. Supply a column name to perform the aggregate function on
+and it will return an integer.</p>
+</div>
+<div class="section" id="raw-queries">
+<h2>Raw queries<a class="headerlink" href="#raw-queries" title="Permalink to this headline">¶</a></h2>
+<p>If you need to perform more complex queries, you can completely specify
+the query to execute by using the <code class="docutils literal notranslate"><span class="pre">raw_query</span></code> method. This method
+takes a string and optionally an array of parameters. The string can
+contain placeholders, either in question mark or named placeholder
+syntax, which will be used to bind the parameters to the query.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$people</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">for_table</span><span class="p">(</span><span class="s1">&#39;person&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">raw_query</span><span class="p">(</span><span class="s1">&#39;SELECT p.* FROM person p JOIN role r ON p.role_id = r.id WHERE r.name = :role&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;role&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;janitor&#39;</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">find_many</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The ORM class instance(s) returned will contain data for all the columns
+returned by the query. Note that you still must call <code class="docutils literal notranslate"><span class="pre">for_table</span></code> to
+bind the instances to a particular table, even though there is nothing
+to stop you from specifying a completely different table in the query.
+This is because if you wish to later called <code class="docutils literal notranslate"><span class="pre">save</span></code>, the ORM will need
+to know which table to update.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">raw_query</span></code> is advanced and possibly dangerous, and
+Idiorm does not make any attempt to protect you from making errors when
+using this method. If you find yourself calling <code class="docutils literal notranslate"><span class="pre">raw_query</span></code> often, you
+may have misunderstood the purpose of using an ORM, or your application
+may be too complex for Idiorm. Consider using a more full-featured
+database abstraction system.</p>
+</div>
+<div class="section" id="raw-sql-execution-using-pdo">
+<h3>Raw SQL execution using PDO<a class="headerlink" href="#raw-sql-execution-using-pdo" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>By using this function you’re dropping down to PHPs PDO directly. Idiorm
+does not make any attempt to protect you from making errors when using this
+method.</p>
+<p>You’re essentially just using Idiorm to manage the connection and configuration
+when you implement <code class="docutils literal notranslate"><span class="pre">raw_execute()</span></code>.</p>
+</div>
+<p>It can be handy, in some instances, to make use of the PDO instance underneath
+Idiorm to make advanced queries. These can be things like dropping a table from
+the database that Idiorm doesn’t support and will not support in the future. These
+are operations that fall outside the 80/20 philosophy of Idiorm. That said there is
+a lot of interest in this function and quite a lot of support requests related to
+it.</p>
+<p>This method directly maps to <a class="reference external" href="https://secure.php.net/manual/en/pdostatement.execute.php">PDOStatement::execute()</a> underneath so please
+familiarise yourself with it’s documentation.</p>
+<div class="section" id="dropping-tables">
+<h4>Dropping tables<a class="headerlink" href="#dropping-tables" title="Permalink to this headline">¶</a></h4>
+<p>This can be done very simply using <code class="docutils literal notranslate"><span class="pre">raw_execute()</span></code>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">ORM</span><span class="o">::</span><span class="na">raw_execute</span><span class="p">(</span><span class="s1">&#39;DROP TABLE my_table&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Table dropped&quot;</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Drop query failed&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="selecting-rows">
+<h4>Selecting rows<a class="headerlink" href="#selecting-rows" title="Permalink to this headline">¶</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You really, should not be doing this, use Idiorm with <code class="docutils literal notranslate"><span class="pre">raw_query()</span></code> instead
+where possible.</p>
+</div>
+<p>Here is a simple query implemented using <code class="docutils literal notranslate"><span class="pre">raw_execute()</span></code> - note the call to
+<code class="docutils literal notranslate"><span class="pre">ORM::get_last_statement()</span></code> as <code class="docutils literal notranslate"><span class="pre">raw_execute()</span></code> returns a boolean as per the
+<a class="reference external" href="https://secure.php.net/manual/en/pdostatement.execute.php">PDOStatement::execute()</a> underneath.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$res</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">raw_execute</span><span class="p">(</span><span class="s1">&#39;SHOW TABLES&#39;</span><span class="p">);</span>
+<span class="nv">$statement</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">get_last_statement</span><span class="p">();</span>
+<span class="nv">$rows</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="k">while</span> <span class="p">(</span><span class="nv">$row</span> <span class="o">=</span> <span class="nv">$statement</span><span class="o">-&gt;</span><span class="na">fetch</span><span class="p">(</span><span class="nx">PDO</span><span class="o">::</span><span class="na">FETCH_ASSOC</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$row</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It is also worth noting that <code class="docutils literal notranslate"><span class="pre">$statement</span></code> is a <code class="docutils literal notranslate"><span class="pre">PDOStatement</span></code> instance so calling
+its <code class="docutils literal notranslate"><span class="pre">fetch()</span></code> method is the same as if you had called against PDO without Idiorm.</p>
+</div>
+</div>
+<div class="section" id="getting-the-pdo-instance">
+<h3>Getting the PDO instance<a class="headerlink" href="#getting-the-pdo-instance" title="Permalink to this headline">¶</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>By using this function you’re dropping down to PHPs PDO directly. Idiorm
+does not make any attempt to protect you from making errors when using this
+method.</p>
+<p>You’re essentially just using Idiorm to manage the connection and configuration
+when you implement against <code class="docutils literal notranslate"><span class="pre">get_db()</span></code>.</p>
+</div>
+<p>If none of the preceeding methods suit your purposes then you can also get direct
+access to the PDO instance underneath Idiorm using <code class="docutils literal notranslate"><span class="pre">ORM::get_db()</span></code>. This will
+return a configured instance of <a class="reference external" href="https://secure.php.net/manual/en/class.pdo.php">PDO</a>.</p>
+<div class="highlight-php notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$pdo</span> <span class="o">=</span> <span class="nx">ORM</span><span class="o">::</span><span class="na">get_db</span><span class="p">();</span>
+<span class="k">foreach</span><span class="p">(</span><span class="nv">$pdo</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">(</span><span class="s1">&#39;SHOW TABLES&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$row</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Querying</a><ul>
+<li><a class="reference internal" href="#a-note-on-psr-1-and-camelcase">A note on PSR-1 and camelCase</a></li>
+<li><a class="reference internal" href="#single-records">Single records</a></li>
+<li><a class="reference internal" href="#multiple-records">Multiple records</a><ul>
+<li><a class="reference internal" href="#as-a-result-set">As a result set</a></li>
+<li><a class="reference internal" href="#as-an-associative-array">As an associative array</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#counting-results">Counting results</a></li>
+<li><a class="reference internal" href="#filtering-results">Filtering results</a><ul>
+<li><a class="reference internal" href="#caveats"><em>Caveats</em></a></li>
+<li><a class="reference internal" href="#equality-where-where-equal-where-not-equal">Equality: <code class="docutils literal notranslate"><span class="pre">where</span></code>, <code class="docutils literal notranslate"><span class="pre">where_equal</span></code>, <code class="docutils literal notranslate"><span class="pre">where_not_equal</span></code></a></li>
+<li><a class="reference internal" href="#shortcut-where-id-is">Shortcut: <code class="docutils literal notranslate"><span class="pre">where_id_is</span></code></a></li>
+<li><a class="reference internal" href="#shortcut-where-id-in">Shortcut: <code class="docutils literal notranslate"><span class="pre">where_id_in</span></code></a></li>
+<li><a class="reference internal" href="#less-than-greater-than-where-lt-where-gt-where-lte-where-gte">Less than / greater than: <code class="docutils literal notranslate"><span class="pre">where_lt</span></code>, <code class="docutils literal notranslate"><span class="pre">where_gt</span></code>, <code class="docutils literal notranslate"><span class="pre">where_lte</span></code>, <code class="docutils literal notranslate"><span class="pre">where_gte</span></code></a></li>
+<li><a class="reference internal" href="#string-comparision-where-like-and-where-not-like">String comparision: <code class="docutils literal notranslate"><span class="pre">where_like</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_like</span></code></a></li>
+<li><a class="reference internal" href="#multiple-or-ed-conditions">Multiple OR’ed conditions</a></li>
+<li><a class="reference internal" href="#set-membership-where-in-and-where-not-in">Set membership: <code class="docutils literal notranslate"><span class="pre">where_in</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_in</span></code></a></li>
+<li><a class="reference internal" href="#working-with-null-values-where-null-and-where-not-null">Working with <code class="docutils literal notranslate"><span class="pre">NULL</span></code> values: <code class="docutils literal notranslate"><span class="pre">where_null</span></code> and <code class="docutils literal notranslate"><span class="pre">where_not_null</span></code></a></li>
+<li><a class="reference internal" href="#raw-where-clauses">Raw WHERE clauses</a></li>
+<li><a class="reference internal" href="#limits-and-offsets">Limits and offsets</a></li>
+<li><a class="reference internal" href="#ordering">Ordering</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#grouping">Grouping</a></li>
+<li><a class="reference internal" href="#having">Having</a></li>
+<li><a class="reference internal" href="#result-columns">Result columns</a><ul>
+<li><a class="reference internal" href="#shortcuts-for-specifying-many-columns">Shortcuts for specifying many columns</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#distinct">DISTINCT</a></li>
+<li><a class="reference internal" href="#joins">Joins</a><ul>
+<li><a class="reference internal" href="#raw-join-clauses">Raw JOIN clauses</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#aggregate-functions">Aggregate functions</a></li>
+<li><a class="reference internal" href="#raw-queries">Raw queries</a><ul>
+<li><a class="reference internal" href="#raw-sql-execution-using-pdo">Raw SQL execution using PDO</a><ul>
+<li><a class="reference internal" href="#dropping-tables">Dropping tables</a></li>
+<li><a class="reference internal" href="#selecting-rows">Selecting rows</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#getting-the-pdo-instance">Getting the PDO instance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="configuration.html"
+                        title="previous chapter">Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="models.html"
+                        title="next chapter">Models</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/querying.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="models.html" title="Models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="configuration.html" title="Configuration"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Idiorm  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Querying</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Jamie Matthews and Simon Holywell.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.1.
+    </div>
+  </body>
+</html>

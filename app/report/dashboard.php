@@ -4,7 +4,7 @@ require_once('../api/classes/db.php');
 require_once('../api/isLogged.php');
 require_once('../api/companycheck.php');
 
-include_once ('classes/visitors.php');
+include_once ('classes/getVisitors.php');
 $visitors = new visitors($db_connect);
 
 require_once('classes/company.php');

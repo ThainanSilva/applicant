@@ -1,0 +1,381 @@
+[16-Oct-2017 21:07:00 UTC] PHP Warning:  PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/nextec/public_html/acessocloud/api/classes/db.php on line 28
+[16-Oct-2017 21:07:00 UTC] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/classes/db.php:34) in /home/nextec/public_html/acessocloud/api/isLogged.php on line 3
+[16-Oct-2017 21:07:00 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/nextec/public_html/acessocloud/api/classes/db.php:34) in /home/nextec/public_html/acessocloud/api/isLogged.php on line 3
+[16-Oct-2017 21:07:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/classes/db.php:34) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 674
+[16-Oct-2017 21:13:44 UTC] PHP Warning:  PDO::__construct(): php_network_getaddresses: getaddrinfo failed: Name or service not known in /home/nextec/public_html/acessocloud/api/classes/db.php on line 28
+[16-Oct-2017 21:13:44 UTC] PHP Warning:  session_start(): Cannot send session cookie - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/classes/db.php:34) in /home/nextec/public_html/acessocloud/api/isLogged.php on line 3
+[16-Oct-2017 21:13:44 UTC] PHP Warning:  session_start(): Cannot send session cache limiter - headers already sent (output started at /home/nextec/public_html/acessocloud/api/classes/db.php:34) in /home/nextec/public_html/acessocloud/api/isLogged.php on line 3
+[16-Oct-2017 21:13:44 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/classes/db.php:34) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 674
+[31-Oct-2017 01:15:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[31-Oct-2017 01:16:24 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[31-Oct-2017 01:17:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[01-Nov-2017 13:04:24 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[01-Nov-2017 13:13:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[01-Nov-2017 13:41:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[01-Nov-2017 15:38:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[01-Nov-2017 15:42:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[01-Nov-2017 20:33:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[01-Nov-2017 21:12:19 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[05-Nov-2017 18:06:29 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:34:03 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:48:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:48:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:48:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:54:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:55:07 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:55:09 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:56:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:56:26 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:56:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:56:49 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:57:19 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:58:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:59:02 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 21:59:04 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:07:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:07:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:07:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:07:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:07:48 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:09:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:10:51 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/nextec/public_html/acessocloud/app/index.php on line 12
+[07-Nov-2017 22:14:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[07-Nov-2017 22:14:48 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[07-Nov-2017 22:14:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[07-Nov-2017 22:14:48 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 71
+[07-Nov-2017 22:14:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[07-Nov-2017 22:14:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[07-Nov-2017 22:18:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:5) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[07-Nov-2017 22:21:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:5) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[07-Nov-2017 22:22:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:5) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[07-Nov-2017 22:22:28 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:5) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[07-Nov-2017 22:24:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/nextec/public_html/acessocloud/app/chooseCompany.php on line 77
+[08-Nov-2017 03:51:14 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/nextec/public_html/acessocloud/app/index.php on line 14
+[08-Nov-2017 03:51:23 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/nextec/public_html/acessocloud/app/index.php on line 14
+[08-Nov-2017 03:51:24 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/nextec/public_html/acessocloud/app/index.php on line 14
+[08-Nov-2017 18:53:00 UTC] PHP Parse error:  syntax error, unexpected '}' in /home/nextec/public_html/acessocloud/app/index.php on line 14
+[08-Nov-2017 18:58:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 18:58:33 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 18:58:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 18:58:33 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 18:58:33 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 71
+[08-Nov-2017 18:58:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 18:58:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 19:20:32 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 19:20:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 19:20:32 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 19:20:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 19:20:32 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 71
+[08-Nov-2017 19:20:32 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 19:20:32 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 20:29:12 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:29:12 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:29:12 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:29:12 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:29:12 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 71
+[08-Nov-2017 20:29:12 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 20:29:12 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 20:35:30 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:35:30 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:35:30 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:35:30 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:15) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:35:30 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 71
+[08-Nov-2017 20:35:30 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 20:35:30 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 142
+[08-Nov-2017 20:38:00 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:38:00 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:38:00 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:38:39 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:38:39 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:38:39 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:38:39 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:39:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:39:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:39:34 UTC] PHP Fatal error:  Uncaught Error: Class 'privileges' not found in /home/nextec/public_html/acessocloud/api/classes/db.php:45
+Stack trace:
+#0 /home/nextec/public_html/acessocloud/app/index.php(6): require_once()
+#1 {main}
+  thrown in /home/nextec/public_html/acessocloud/api/classes/db.php on line 45
+[08-Nov-2017 20:39:44 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:39:44 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:39:44 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:39:44 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:40:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:40:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:40:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:40:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:40:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:40:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:14) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 73
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 20:40:56 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 20:41:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:11) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 20:41:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:11) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 73
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 20:41:40 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:34:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:34:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 21:34:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 21:34:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 73
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:34:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 21:34:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 21:34:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 73
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:34:46 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:35:38 UTC] PHP Notice:  Undefined variable: priv in /home/nextec/public_html/acessocloud/app/index.php on line 6
+[08-Nov-2017 21:35:38 UTC] PHP Fatal error:  Uncaught Error: Call to a member function getUserProfile() on null in /home/nextec/public_html/acessocloud/app/index.php:6
+Stack trace:
+#0 {main}
+  thrown in /home/nextec/public_html/acessocloud/app/index.php on line 6
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 21:36:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:36:45 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 21:36:48 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:36:48 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:37:28 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/nextec/public_html/acessocloud/api/isLogged.php on line 4
+[08-Nov-2017 21:37:28 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:4) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 696
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/api/companycheck.php on line 3
+[08-Nov-2017 21:39:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:39:17 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:39:18 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:39:18 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:40:49 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:40:49 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 11
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 73
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:52:33 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 144
+[08-Nov-2017 21:52:39 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:39 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:39 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:39 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:39 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:39 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:41 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:41 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:41 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:41 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:41 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:43 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:43 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:43 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:43 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:43 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:43 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:47 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:47 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:47 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:47 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:47 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:47 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:49 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:53 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:53 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:53 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:53 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:53 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:53 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:57 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:57 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:57 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:57 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:57 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:57 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:52:59 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 77
+[08-Nov-2017 21:52:59 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 79
+[08-Nov-2017 21:52:59 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 86
+[08-Nov-2017 21:52:59 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:52:59 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:52:59 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 108
+[08-Nov-2017 21:54:26 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:54:27 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:54:27 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:54:27 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:54:27 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:54:27 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:54:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:54:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:54:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:54:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:54:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:54:42 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 21:55:11 UTC] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/nextec/public_html/acessocloud/api/isLogged.php on line 4
+[08-Nov-2017 21:55:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:4) in /home/nextec/public_html/acessocloud/api/classes/users.php on line 697
+[08-Nov-2017 21:55:28 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 76
+[08-Nov-2017 21:55:28 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 78
+[08-Nov-2017 21:55:28 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 85
+[08-Nov-2017 21:55:28 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 105
+[08-Nov-2017 21:55:28 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 106
+[08-Nov-2017 21:55:28 UTC] PHP Notice:  Undefined variable: userProfile in /home/nextec/public_html/acessocloud/app/index.php on line 107
+[08-Nov-2017 22:07:50 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[08-Nov-2017 22:08:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 22:08:15 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 22:08:15 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 22:08:15 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 22:08:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 22:08:22 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 22:08:22 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 22:08:22 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 22:09:09 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 22:09:09 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 10
+[08-Nov-2017 22:09:09 UTC] PHP Notice:  Undefined index: company_identifier in /home/nextec/public_html/acessocloud/app/index.php on line 72
+[08-Nov-2017 22:09:09 UTC] PHP Notice:  Undefined index: company_id in /home/nextec/public_html/acessocloud/app/index.php on line 143
+[08-Nov-2017 22:09:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Nov-2017 22:09:40 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[30-Nov-2017 15:09:55 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Dec-2017 17:37:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Dec-2017 19:41:08 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[08-Dec-2017 22:52:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[09-Dec-2017 03:57:57 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[09-Dec-2017 18:30:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[20-Dec-2017 18:50:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[20-Dec-2017 18:52:02 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[20-Dec-2017 21:11:48 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[20-Dec-2017 21:17:14 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[20-Dec-2017 21:17:39 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[20-Dec-2017 21:18:21 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[21-Dec-2017 11:49:32 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[21-Dec-2017 12:06:24 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[21-Dec-2017 12:07:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[21-Dec-2017 12:29:18 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[21-Dec-2017 12:31:19 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[21-Dec-2017 14:10:26 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[21-Dec-2017 14:10:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[28-Dec-2017 15:41:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[28-Dec-2017 15:43:15 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[03-Jan-2018 18:56:13 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[03-Jan-2018 19:02:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[04-Jan-2018 12:40:24 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[04-Jan-2018 12:40:45 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[10-Jan-2018 14:20:57 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[10-Jan-2018 14:22:19 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[10-Jan-2018 14:30:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[10-Jan-2018 14:35:25 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[11-Jan-2018 12:15:47 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[11-Jan-2018 12:16:23 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[16-Jan-2018 13:04:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[16-Jan-2018 17:03:35 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[16-Jan-2018 17:05:49 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[16-Jan-2018 20:38:31 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[16-Jan-2018 21:20:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[16-Jan-2018 21:21:17 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[17-Jan-2018 19:15:20 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[17-Jan-2018 19:31:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[18-Jan-2018 17:15:07 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[18-Jan-2018 17:16:26 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[18-Jan-2018 20:19:53 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[18-Jan-2018 20:56:34 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[19-Jan-2018 17:02:37 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[19-Jan-2018 17:33:14 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[19-Jan-2018 17:34:58 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[23-Jan-2018 12:25:51 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[23-Jan-2018 12:27:11 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[23-Jan-2018 14:55:26 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[23-Jan-2018 14:56:01 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[23-Jan-2018 17:01:05 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[23-Jan-2018 17:44:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[23-Jan-2018 17:46:57 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[24-Jan-2018 17:34:36 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[24-Jan-2018 17:35:08 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[24-Jan-2018 19:57:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[24-Jan-2018 19:57:52 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[25-Jan-2018 13:21:27 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[25-Jan-2018 13:23:03 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[29-Jan-2018 14:55:30 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[29-Jan-2018 14:55:54 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[29-Jan-2018 21:09:22 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[29-Jan-2018 21:09:44 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[30-Jan-2018 11:54:16 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[30-Jan-2018 11:55:09 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[31-Jan-2018 11:56:10 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[31-Jan-2018 11:57:38 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[31-Jan-2018 19:14:03 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[31-Jan-2018 19:14:06 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[31-Mar-2018 14:03:56 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[31-Mar-2018 14:08:48 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/app/logOut.php on line 6
+[31-Mar-2018 14:11:59 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[06-Apr-2018 22:22:46 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4
+[31-Jul-2018 16:50:58 UTC] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/nextec/public_html/acessocloud/api/isLogged.php:8) in /home/nextec/public_html/acessocloud/api/companycheck.php on line 4

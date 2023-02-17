@@ -1,4 +1,8 @@
 <?php
+include_once $_SERVER['DOCUMENT_ROOT'].'/api/classes/db.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/api/classes/privileges.php';
+
+ 
 class USER
 {
     private $db;
@@ -377,8 +381,8 @@ class USER
                 // O return-path deve ser ser o mesmo e-mail do remetente.
                 $headers = "MIME-Version: 1.1\r\n";
                 $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
-                $headers .= "From: noreply@peguei.net\r\n"; // remetente
-                $headers .= "Return-Path: noreply@peguei.net\r\n"; // return-path
+                $headers .= "From: noreply@nextecbrasil.com.br\r\n"; // remetente
+                $headers .= "Return-Path: noreply@nextecbrasil.com.br\r\n"; // return-path
                 $envio = mail($email, "Recuperaçao de Senha", $textEmail, $headers);
 
                 if($envio)

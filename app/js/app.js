@@ -1,5 +1,9 @@
-$(document).ready(function(){
 
+
+$(document).ready(function(){
+ 
+    $(".dropdown-toggle").dropdown();
+ 
 
 
 
@@ -8,7 +12,10 @@ $(document).ready(function(){
 
     $('li').removeClass('active');
     $(elm).parent().addClass('active');
-      $("#contentmanager").load(page);
+      $("#contentmanager").load(page, function( response, status, xhr ) {
+        if ( status == "error" ) {
+          Toastr.error(msg + xhr.status + " " + xhr.statusText );
+        }});
 
   }
 
@@ -27,14 +34,16 @@ $(document).ready(function(){
 $("#dashboard").click(function(){
     loadPage('pages/dashboard.php', "#dashboard");
 })
-
+$("#jobOpenning").click(function(){
+  loadPage('pages/jobopening.php', "#jobOpenning");
+})
 $("#devices").click(function(){
     loadPage('pages/devices.php', "#devices"); 
 })
 
   $(".company-chooser-click").click(function(){
     $.ajaxSetup({
-        timeout: 6000, //time in miliseconds
+        timeout: 6000, //time in miliseconds 
         error:function(xhr){
             noConnection();
     }});
